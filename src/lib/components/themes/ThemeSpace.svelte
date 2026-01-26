@@ -20,6 +20,7 @@
 </script>
 
 <div class="space-background relative -z-20 min-h-screen max-w-screen overflow-hidden">
+  {@render children()}
   {#each stars as star}
     <div
       class={star.isStatic ? "star" : "star active"} 
@@ -30,7 +31,6 @@
     TODO: comets
     <div class="comets relative -z-10"></div>
   -->
-  {@render children()}
 </div>
 
 <style>
