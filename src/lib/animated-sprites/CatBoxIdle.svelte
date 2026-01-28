@@ -1,18 +1,19 @@
 <script lang="ts">
-  import { T, Canvas} from "@threlte/core";
-  import { AnimatedSpriteMaterial } from "@threlte/extras";
+  import CatBoxIdle from "$lib/assets/cat-box-idle.png";
 </script>
 
-<div class="h-8 w-8">
-  <Canvas>
-    <T.Sprite
-      scale={[7,7,1]}
-    >
-      <AnimatedSpriteMaterial
-        textureUrl="/src/lib/assets/cat-box-idle.png"
-        totalFrames={4}
-        fps={4}
-      />
-    </T.Sprite>
-  </Canvas>
-</div>
+<div class="cat-box-idle" style="--spritesheet-url: url({CatBoxIdle})"></div>
+
+<style>
+  .cat-box-idle {
+    background: var(--spritesheet-url);
+    width: 32px;
+    height: 32px;
+    animation: sprite 1.4s steps(4) infinite;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+  }
+  @keyframes sprite {
+    to { background-position: -128px;}
+  }
+</style>
