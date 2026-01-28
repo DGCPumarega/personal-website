@@ -20,7 +20,7 @@
 <ThemeProvider>
 	<header class="w-full h-20 flex flex-col justify-end text-white mx-4 lg:mx-auto lg:w-250">
 		<div class="relative w-min pl-1">
-			<h1 class="uppercase text-xl sm:text-4xl font-press-start neon-text" data-text="DGCPumarega.dev">DGCPumarega.dev</h1>
+			<h1 class="uppercase text-xl sm:text-4xl font-press-start neon-text z-1" data-text="DGCPumarega.dev">DGCPumarega.dev</h1>
 		</div>
 	</header>
 	{@render children()}

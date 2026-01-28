@@ -19,18 +19,22 @@
 	let { children } = $props();
 </script>
 
-<div class="space-background relative -z-20 min-h-screen max-w-screen overflow-hidden">
-  {@render children()}
-  {#each stars as star}
-    <div
-      class={star.isStatic ? "star" : "star active"} 
-      style="left:{star.x}%; top:{star.y}%; width:{star.size}px; height:{star.size}px">
-    </div>
-  {/each}
-  <!--
-    TODO: comets
-    <div class="comets relative -z-10"></div>
-  -->
+<div class="relative space-background min-h-screen max-w-screen overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    {#each stars as star}
+      <div
+        class={star.isStatic ? "star" : "star active"} 
+        style="left:{star.x}%; top:{star.y}%; width:{star.size}px; height:{star.size}px">
+      </div>
+    {/each}
+    <!--
+      TODO: comets
+      <div class="comets relative -z-10"></div>
+    -->
+  </div>
+  <div class="relative bg-transparent">
+    {@render children()}
+  </div>
 </div>
 
 <style>
