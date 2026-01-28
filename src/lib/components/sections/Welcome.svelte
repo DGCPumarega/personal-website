@@ -6,7 +6,10 @@
 <section class="{className} font-oxanium">
   <div class="flex gap-x-2 align-middle justify-center">
     <h2 class="text-3xl text-center uppercase font-bold">Welcome</h2>
-    <CatBoxIdle />
+    <!--
+      TODO: Replace Threlte with CSS for animated sprites 
+      <CatBoxIdle />
+    -->
   </div>
   <div class="flex flex-col gap-y-4 leading-5">
     <p>
