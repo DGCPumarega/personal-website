@@ -9,7 +9,7 @@
     background: var(--spritesheet-url);
     width: 32px;
     height: 32px;
-    animation: sprite 1.4s steps(4) infinite;
+    animation: sprite 1.1s steps(4) infinite;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
   }
