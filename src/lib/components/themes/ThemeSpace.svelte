@@ -73,7 +73,7 @@
         transform: scale(1.2);
     }
   }
-  :global(main section) {
+  :global(main div section, main section) {
     background-color: black;
     opacity: 0.60;
     border: 2px solid white;
