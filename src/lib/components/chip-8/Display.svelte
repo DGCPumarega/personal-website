@@ -1,38 +1,52 @@
 <script lang="ts">
   import { onMount } from "svelte";
-
-  let rows: boolean[] = $state([false])
-  let cols: boolean[] = $state([false])
+  import { error } from "@sveltejs/kit";
 
   let { pixels }: { pixels: boolean[][] } = $props();
 
+  let canvas: HTMLCanvasElement | null = $state(null);
+  let ctx: CanvasRenderingContext2D | null = $state(null);
+
   onMount(() => {
-    rows = Array.from({ length: pixels.length });
-    cols = Array.from({ length: pixels[0].length });
+    canvas = document.getElementById("ch8-display") as HTMLCanvasElement;
+    if(!canvas) { throw error(400, "Unable to load CHIP-8 display"); }
+
+    ctx = canvas.getContext("2d");
+    if(!ctx) { throw error(400, "Unable to get CHIP-8 display context")}
   });
 
-  $effect(() => {
-    for(let i = 0; i < pixels.length; i++) {
-      for(let j = 0; j < pixels[0].length; j++) {
-        if(pixels[i][j]) { console.log(`ON: ${i}, ${j}`); }
-      }
-    }
+  const draw = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
+    ctx.fillStyle = "red"
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    let pxw = canvas.width / 64;
+    let pxh  = canvas.height / 32;
+
+    ctx.fillStyle = "white"
+    pixels.forEach((row, y) => {
+      row.forEach((pixel, x) => {
+        if(pixel) { ctx.fillRect(x*pxw, y*pxh, pxw, pxh); }
+      });
+    });
+  };
+
+  $effect(() => { 
+    if(canvas && ctx) { draw(canvas, ctx); }
   });
 </script>
 
-<div class="ch8-display">
-  {#each rows as _, y}
-    {#each cols as _, x}
-      <div class="bg-white"></div>
-    {/each}
-  {/each}
-</div>
+<canvas
+  id="ch8-display"
+  bind:this={canvas}
+  width="640"
+  height="320"
+  class="mx-auto"
+></canvas>
 
 <style>
-  .ch8-display {
-    display: grid;
-    grid-template-columns: repeat(64, 10px);
-    grid-template-rows: repeat(32, 10px);
-    gap: 2px;
+  #ch8-display {
+    width: 640px;
+    height: 320px;
+    image-rendering: pixelated;
   }
 </style>
