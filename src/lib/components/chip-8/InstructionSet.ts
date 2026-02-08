@@ -15,9 +15,8 @@ export const _00EE = (vm: VirtualMachine) => {
   // then, subtract 1 from stack pointer
   console.log("...executing instruction 00EE");
 
-  let idx = vm.sp[0];
-  vm.pc[0] = vm.stack[idx];
-  vm.sp[0] = idx - 1;
+  vm.pc[0] = vm.stack[vm.sp[0]];
+  vm.sp[0] -= 1;
   console.log(`PC set to ${vm.pc[0].toString(16)}...`)
   console.log(`SP set to ${vm.sp[0].toString(16)}...`)
 };
@@ -29,6 +28,49 @@ export const _1nnn = (nibbles: number[], vm: VirtualMachine) => {
 
   vm.pc[0] = (nibbles[1] << 4 | nibbles[2]) << 4 | nibbles[3];
   console.log(`PC set to ${vm.pc[0].toString(16)}...`)
+};
+
+
+export const _2nnn = (nibbles: number[], vm: VirtualMachine) => {
+  // Call subroutine at nnn
+  // increment the stack pointer and puts PC on top of stack
+  // PC is set to nnn
+  console.log("...executing instruction 2nnn");
+  
+  vm.sp[0] += 1;
+  vm.stack[vm.sp[0]] = vm.pc[0];
+  vm.pc[0] = (nibbles[1] << 4 | nibbles[2]) << 4 | nibbles[3];
+};
+
+
+export const _3xkk = (nibbles:number[], vm: VirtualMachine) => {
+  // Skip next instruction if Vx === kk
+  console.log("...executing instruction 3xkk");
+
+  let cmp: boolean = vm.v[nibbles[1]][0] === (nibbles[2] << 4 | nibbles[3]);
+  if(cmp) { vm.pc[0] += 2; }
+
+  console.log(`Value in V${nibbles[1].toString(16)} is ${cmp ? "equal" : "not equal"} to ${nibbles[2] << 4 | nibbles[3]}`)
+};
+
+export const _4xkk = (nibbles:number[], vm: VirtualMachine) => {
+  // Skip next instruction if Vx !== kk
+  console.log("...executing instruction 4xkk");
+
+  let cmp: boolean = vm.v[nibbles[1]][0] === (nibbles[2] << 4 | nibbles[3]);
+  if(!cmp) { vm.pc[0] += 2; }
+
+  console.log(`Value in V${nibbles[1].toString(16)} is ${cmp ? "equal" : "not equal"} to ${nibbles[2] << 4 | nibbles[3]}`)
+};
+
+export const _5xy0 = (nibbles:number[], vm: VirtualMachine) => {
+  // Skip next instruction if Vx === Vy
+  console.log("...executing instruction 5xy0");
+
+  let cmp: boolean = vm.v[nibbles[1]][0] === vm.v[nibbles[2]][0];
+  if(cmp) { vm.pc[0] += 2; }
+
+  console.log(`Value in V${nibbles[1].toString(16)} is ${cmp ? "equal" : "not equal"} to V${nibbles[2].toString(16)}`)
 };
 
 export const _6xkk = (nibbles:number[], vm: VirtualMachine) => {
@@ -49,6 +91,137 @@ export const _7xkk = (nibbles:number[], vm: VirtualMachine) => {
   console.log(`register V${idx.toString(16)} set to ${vm.v[idx][0].toString(16)}...`)
 };
 
+export const _8xy0 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = Vy
+  console.log("...executing instruction 8xy0");
+
+  vm.v[nibbles[1]][0] = vm.v[nibbles[2]][0];
+};
+
+export const _8xy1 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = Vx OR Vy
+  console.log("...executing instruction 8xy1");
+
+  vm.v[nibbles[1]][0] = vm.v[nibbles[1]][0] | vm.v[nibbles[2]][0];
+};
+
+export const _8xy2 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = Vx AND Vy
+  console.log("...executing instruction 8xy2");
+
+  vm.v[nibbles[1]][0] = vm.v[nibbles[1]][0] & vm.v[nibbles[2]][0];
+};
+
+export const _8xy3 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = Vx XOR Vy
+  console.log("...executing instruction 8xy3");
+
+  vm.v[nibbles[1]][0] = vm.v[nibbles[1]][0] ^ vm.v[nibbles[2]][0];
+}
+
+export const _8xy4 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = Vx + Vy
+  // if Vx + Vy > 255, set Vf = 1 (carry) and Vx = (Vx + Vy) % 256
+  console.log("...executing instruction 8xy4");
+
+  let sum = vm.v[nibbles[1]][0] + vm.v[nibbles[2]][0];
+
+  if(sum > 255) { vm.v[0xf][0] = 1; }
+  else { vm.v[0xf][0] = 0; }
+
+  vm.v[nibbles[1]][0] = sum % 256;
+
+  console.log(`V${nibbles[1].toString(16)} + V${nibbles[2].toString(16)} = ${sum}`)
+  console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0]}`)
+  console.log(`Vf: ${vm.v[0xf][0]}`)
+}
+
+export const _8xy5 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = Vx - Vy
+  // Vf is initialized to 1
+  // if Vx - Vy < 0, set Vf = 0 and Vx = |Vx - Vy|
+  console.log("...executing instruction 8xy5");
+
+  vm.v[0xf][0] = 1;
+
+  let diff = vm.v[nibbles[1]][0] - vm.v[nibbles[2]][0];
+  if(diff < 0) { vm.v[0xf][0] = 0; }
+
+  vm.v[nibbles[1]][0] = Math.abs(diff);
+
+  console.log(`V${nibbles[1].toString(16)} - V${nibbles[2].toString(16)} = ${diff}`)
+  console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0]}`)
+  console.log(`Vf: ${vm.v[0xf][0]}`)
+}
+
+export const _8xy6 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = Vx >> 1
+  // move the value of the bit shifted out to Vf
+  // (i.e. if the least significant bit was 1, set Vf = 1; if the least significant bit was 0, set Vf = 0)
+  console.log("...executing instruction 8xy6");
+
+  // LEGACY RULE: Vx is set to Vy before shifting
+  // vm.v[nibbles[1]][0] = vm.v[nibbles[2]][0];
+
+  console.log(`Initial Value of V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
+  console.log(`Initial Value of Vf: ${vm.v[0xf][0]}`)
+
+  vm.v[0xf][0] = vm.v[nibbles[1]][0] % 2;
+  vm.v[nibbles[1]][0] = vm.v[nibbles[1]][0] >> 1;
+
+  console.log(`Final Value of V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
+  console.log(`Final Value of Vf: ${vm.v[0xf][0]}`)
+}
+
+export const _8xy7 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = Vy - Vx
+  // Vf is initialized to 1
+  // if Vy - Vx < 0, set Vf = 0 and Vx = |Vy - Vx|
+  console.log("...executing instruction 8xy7");
+
+  vm.v[0xf][0] = 1;
+
+  let diff = vm.v[nibbles[2]][0] - vm.v[nibbles[1]][0];
+  if(diff < 0) { vm.v[0xf][0] = 0; }
+
+  vm.v[nibbles[1]][0] = Math.abs(diff);
+
+  console.log(`V${nibbles[2].toString(16)} - V${nibbles[1].toString(16)} = ${diff}`)
+  console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0]}`)
+  console.log(`Vf: ${vm.v[0xf][0]}`)
+}
+
+export const _8xyE = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = Vx << 1
+  // move the value of the bit shifted out to Vf
+  // (i.e. if the most significant bit was 1, set Vf = 1; if the most significant bit was 0, set Vf = 0)
+  console.log("...executing instruction 8xyE");
+
+  // LEGACY RULE: Vx is set to Vy before shifting
+  // vm.v[nibbles[1]][0] = vm.v[nibbles[2]][0];
+
+  console.log(`Initial Value of V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
+  console.log(`Initial Value of Vf: ${vm.v[0xf][0]}`)
+
+  if(vm.v[nibbles[1]][0] > 127) { vm.v[0xf][0] = 1; }
+  else { vm.v[0xf][0] = 0; }
+
+  vm.v[nibbles[1]][0] = vm.v[nibbles[1]][0] << 1;
+
+  console.log(`Final Value of V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
+  console.log(`Final Value of Vf: ${vm.v[0xf][0]}`)
+}
+
+export const _9xy0 = (nibbles:number[], vm: VirtualMachine) => {
+  // Skip next instruction if Vx !== Vy
+  console.log("...executing instruction 9xy0");
+
+  let cmp: boolean = vm.v[nibbles[1]][0] === vm.v[nibbles[2]][0];
+  if(cmp) { vm.pc[0] += 2; }
+
+  console.log(`Value in V${nibbles[1].toString(16)} is ${cmp ? "equal" : "not equal"} to ${nibbles[2] << 4 | nibbles[3]}`)
+};
+
 export const _Annn = (nibbles:number[], vm: VirtualMachine) => {
   // Set register I to nnn
   console.log("...executing instruction Annn");
@@ -56,6 +229,27 @@ export const _Annn = (nibbles:number[], vm: VirtualMachine) => {
   vm.i[0] = (nibbles[1] << 4 | nibbles[2]) << 4 | nibbles[3];
   console.log(`register I set to value: ${vm.i[0].toString(16)}...`)
 };
+
+export const _Bnnn = (nibbles:number[], vm: VirtualMachine) => {
+  // Jump to location nnn + V0
+  console.log("...executing instruction Bnnn");
+
+  let nnn = (nibbles[1] << 4 | nibbles[2]) << 4 | nibbles[3];
+  vm.pc[0] = nnn + vm.v[0][0];
+
+  console.log(`PC set to address: ${vm.pc[0]}`)
+}
+
+export const _Cxkk = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx to a random byte AND kk
+  console.log("...executing instruction Cnnn");
+
+  let rng = Math.floor((Math.random() * 255));
+  let kk = nibbles[2] << 4 | nibbles[3];
+
+  vm.v[nibbles[1]][0] = rng & kk;
+  console.log(`V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
+}
 
 export const _Dxyn = (nibbles:number[], vm: VirtualMachine) => {
   // Display n-byte sprite image on screen
@@ -102,6 +296,9 @@ export const _Dxyn = (nibbles:number[], vm: VirtualMachine) => {
   }
 }
 
+export const _Ex9E = (nibbles:number[], vm: VirtualMachine) => {
+}
+
 export const unrecognized = (nibbles: number[]) => {
-  console.log(`Unrecognized Instruction: ${nibbles.map((x) => x.toString(16))}`);
+  console.error(`Unrecognized Instruction: ${nibbles.map((x) => x.toString(16))}`);
 }
