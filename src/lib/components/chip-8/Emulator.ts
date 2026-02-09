@@ -55,7 +55,6 @@ export const runLoop = (VM: VirtualMachine) => {
     (opcode & 0x00F0) >> 4,
     (opcode & 0x000F),
   ];
-  console.log(`nibbles: ${nibbles.map((x) => x.toString(16))}`);
 
   // execute
   switch(nibbles[0]) {
