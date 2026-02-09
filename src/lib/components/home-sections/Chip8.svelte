@@ -9,10 +9,8 @@
   type AvailableROM = { value: string; label: string; }
   let availableRoms: AvailableROM[] = [
     { value: "ibm-logo", label: "IBM Logo" },
-    { value: "placeholder-2", label: "Placeholder 2" },
-    { value: "placeholder-3", label: "Placeholder 3" },
-    { value: "placeholder-4", label: "Placeholder 4" },
-    { value: "placeholder-5", label: "Placeholder 5" },
+    { value: "corax-plus", label: "Corax+" },
+    { value: "flags", label: "Flags" },
   ];
 
   let triggerContent = $derived(
