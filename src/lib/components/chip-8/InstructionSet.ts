@@ -139,7 +139,7 @@ export const _8xy4 = (nibbles:number[], vm: VirtualMachine) => {
 export const _8xy5 = (nibbles:number[], vm: VirtualMachine) => {
   // Set Vx = Vx - Vy
   // Vf is initialized to 1
-  // if Vx - Vy < 0, set Vf = 0 and Vx = |Vx - Vy|
+  // if Vx - Vy < 0, set Vf = 0 and Vx = Vx - Vy
   console.log("...executing instruction 8xy5");
 
   vm.v[0xf][0] = 1;
@@ -147,7 +147,7 @@ export const _8xy5 = (nibbles:number[], vm: VirtualMachine) => {
   let diff = vm.v[nibbles[1]][0] - vm.v[nibbles[2]][0];
   if(diff < 0) { vm.v[0xf][0] = 0; }
 
-  vm.v[nibbles[1]][0] = Math.abs(diff);
+  vm.v[nibbles[1]][0] = diff;
 
   console.log(`V${nibbles[1].toString(16)} - V${nibbles[2].toString(16)} = ${diff}`)
   console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0]}`)
@@ -184,7 +184,7 @@ export const _8xy7 = (nibbles:number[], vm: VirtualMachine) => {
   let diff = vm.v[nibbles[2]][0] - vm.v[nibbles[1]][0];
   if(diff < 0) { vm.v[0xf][0] = 0; }
 
-  vm.v[nibbles[1]][0] = Math.abs(diff);
+  vm.v[nibbles[1]][0] = diff;
 
   console.log(`V${nibbles[2].toString(16)} - V${nibbles[1].toString(16)} = ${diff}`)
   console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0]}`)
@@ -217,7 +217,7 @@ export const _9xy0 = (nibbles:number[], vm: VirtualMachine) => {
   console.log("...executing instruction 9xy0");
 
   let cmp: boolean = vm.v[nibbles[1]][0] === vm.v[nibbles[2]][0];
-  if(cmp) { vm.pc[0] += 2; }
+  if(!cmp) { vm.pc[0] += 2; }
 
   console.log(`Value in V${nibbles[1].toString(16)} is ${cmp ? "equal" : "not equal"} to ${nibbles[2] << 4 | nibbles[3]}`)
 };
