@@ -66,14 +66,54 @@ export const runLoop = (VM: VirtualMachine) => {
       else{ Instruction.unrecognized(nibbles); break; }
     case 0x1:
       Instruction._1nnn(nibbles, VM); break;
+    case 0x2:
+      Instruction._2nnn(nibbles, VM); break;
+    case 0x3:
+      Instruction._3xkk(nibbles, VM); break;
+    case 0x4:
+      Instruction._4xkk(nibbles, VM); break;
+    case 0x5:
+      Instruction._5xy0(nibbles, VM); break;
     case 0x6:
       Instruction._6xkk(nibbles, VM); break;
     case 0x7:
       Instruction._7xkk(nibbles, VM); break;
+    case 0x8:
+      if(nibbles[3] === 0) { Instruction._8xy0(nibbles, VM); break;}
+      else if(nibbles[3] === 0x1) { Instruction._8xy1(nibbles, VM); break;}
+      else if(nibbles[3] === 0x2) { Instruction._8xy2(nibbles, VM); break;}
+      else if(nibbles[3] === 0x3) { Instruction._8xy3(nibbles, VM); break;}
+      else if(nibbles[3] === 0x4) { Instruction._8xy4(nibbles, VM); break;}
+      else if(nibbles[3] === 0x5) { Instruction._8xy5(nibbles, VM); break;}
+      else if(nibbles[3] === 0x6) { Instruction._8xy6(nibbles, VM); break;}
+      else if(nibbles[3] === 0x7) { Instruction._8xy7(nibbles, VM); break;}
+      else if(nibbles[3] === 0xE) { Instruction._8xyE(nibbles, VM); break;}
+      else{ Instruction.unrecognized(nibbles); break; }
+    case 0x9:
+      Instruction._9xy0(nibbles, VM); break;
     case 0xA:
       Instruction._Annn(nibbles, VM); break;
+    case 0xB:
+      Instruction._Bnnn(nibbles, VM); break;
+    case 0xC:
+      Instruction._Cxkk(nibbles, VM); break;
     case 0xD:
       Instruction._Dxyn(nibbles, VM); break;
+    case 0xE:
+      if(nibbles[2] === 0x9 && nibbles[3] === 0xE) { Instruction._Ex9E(nibbles, VM); break;}
+      else if(nibbles[2] === 0xA && nibbles[3] === 0x1) { Instruction._ExA1(nibbles, VM); break;}
+      else{ Instruction.unrecognized(nibbles); break; }
+    case 0xF:
+      if(nibbles[2] === 0x0 && nibbles[3] === 0x7) { Instruction._Fx07(nibbles, VM); break; }
+      else if(nibbles[2] === 0x0 && nibbles[3] === 0xA) { Instruction._Fx0A(nibbles, VM); break; }
+      else if(nibbles[2] === 0x1 && nibbles[3] === 0x5) { Instruction._Fx15(nibbles, VM); break; }
+      else if(nibbles[2] === 0x1 && nibbles[3] === 0x8) { Instruction._Fx18(nibbles, VM); break; }
+      else if(nibbles[2] === 0x1 && nibbles[3] === 0xE) { Instruction._Fx1E(nibbles, VM); break; }
+      else if(nibbles[2] === 0x2 && nibbles[3] === 0x9) { Instruction._Fx29(nibbles, VM); break; }
+      else if(nibbles[2] === 0x3 && nibbles[3] === 0x3) { Instruction._Fx33(nibbles, VM); break; }
+      else if(nibbles[2] === 0x5 && nibbles[3] === 0x5) { Instruction._Fx55(nibbles, VM); break; }
+      else if(nibbles[2] === 0x6 && nibbles[3] === 0x5) { Instruction._Fx65(nibbles, VM); break; }
+      else{ Instruction.unrecognized(nibbles); break; }
     default:
       Instruction.unrecognized(nibbles); 
   }

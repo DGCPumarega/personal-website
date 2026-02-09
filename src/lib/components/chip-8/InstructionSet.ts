@@ -244,7 +244,7 @@ export const _Cxkk = (nibbles:number[], vm: VirtualMachine) => {
   // Set Vx to a random byte AND kk
   console.log("...executing instruction Cnnn");
 
-  let rng = Math.floor((Math.random() * 255));
+  let rng = Math.round((Math.random() * 255));
   let kk = nibbles[2] << 4 | nibbles[3];
 
   vm.v[nibbles[1]][0] = rng & kk;
@@ -297,6 +297,91 @@ export const _Dxyn = (nibbles:number[], vm: VirtualMachine) => {
 }
 
 export const _Ex9E = (nibbles:number[], vm: VirtualMachine) => {
+  // Skip next instruction if key with value of vx is being pressed
+  console.log("...executing instruction Ex9E");
+
+  if(vm.keypad === nibbles[1]) { vm.pc[0] += 2; }
+}
+
+export const _ExA1 = (nibbles:number[], vm: VirtualMachine) => {
+  // Skip next instruction if key with value of vx is NOT being pressed
+  console.log("...executing instruction ExA1");
+
+  if(vm.keypad !== nibbles[1]) { vm.pc[0] += 2; }
+}
+
+export const _Fx07 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set Vx = delay timer value
+  console.log("...executing instruction Fx07");
+
+  vm.v[nibbles[1]][0] = vm.delayTimer[0];
+}
+
+export const _Fx0A = (nibbles:number[], vm: VirtualMachine) => {
+  // Wait for a key press, store the value of the key into Vx
+  console.log("...executing instruction Fx0A");
+
+  if(vm.keypad !== null) { vm.v[nibbles[1]][0] = vm.keypad; }
+  else { vm.pc[0] -= 2; } // undo the increment of PC from the fetch step
+}
+
+export const _Fx15 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set delay timer = value in Vx
+  console.log("...executing instruction Fx15");
+
+  vm.delayTimer[0] = vm.v[nibbles[1]][0];
+}
+
+export const _Fx18 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set sound timer = value in Vx
+  console.log("...executing instruction Fx18");
+
+  vm.soundTimer[0] = vm.v[nibbles[1]][0];
+}
+
+export const _Fx1E = (nibbles:number[], vm: VirtualMachine) => {
+  // Set I += Vx
+  console.log("...executing instruction Fx1E");
+
+  vm.i[0] += vm.v[nibbles[1]][0];
+}
+
+export const _Fx29 = (nibbles:number[], vm: VirtualMachine) => {
+  // Set I = location of sprite for digit Vx
+  console.log("...executing instruction Fx29");
+
+  vm.i[0] = 0x50 + nibbles[1];
+}
+
+export const _Fx33 = (nibbles:number[], vm: VirtualMachine) => {
+  // Store the Binary Coded Decimal representation of Vx at memory addresses stored in I, I+1, and I+2
+  console.log("...executing instruction Fx33");
+
+  let hundreds = Math.trunc(vm.v[nibbles[1]][0] / 100);
+  let tens = Math.trunc(vm.v[nibbles[1]][0] / 10) % 10;
+  let ones = vm.v[nibbles[1]][0] % 10;
+
+  vm.memory[vm.i[0]] = hundreds;
+  vm.memory[vm.i[0] + 1] = tens;
+  vm.memory[vm.i[0] + 2] = ones;
+}
+
+export const _Fx55 = (nibbles:number[], vm: VirtualMachine) => {
+  // Store registers V0 to Vx (inclusive) in memory starting at location I
+  console.log("...executing instruction Fx55");
+
+  for(let idx = 0; idx <= nibbles[1]; idx++) {
+    vm.memory[vm.i[0] + idx] = vm.v[idx][0];
+  }
+}
+
+export const _Fx65 = (nibbles:number[], vm: VirtualMachine) => {
+  // Store values in memory starting at location I into registers V0 to Vx (inclusive)
+  console.log("...executing instruction Fx65");
+
+  for(let idx = 0; idx <= nibbles[1]; idx++) {
+    vm.v[idx][0] = vm.memory[vm.i[0] + idx];
+  }
 }
 
 export const unrecognized = (nibbles: number[]) => {

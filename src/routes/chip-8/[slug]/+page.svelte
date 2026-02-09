@@ -13,8 +13,11 @@
 
 		// TODO: set up more accurate clock
 		setInterval(() => { 
-			runLoop(vm); 
-		}, 1000);
+			runLoop(vm);
+
+			if(vm.delayTimer[0] > 0) { vm.delayTimer[0] -= 1; }
+			if(vm.soundTimer[0] > 0) { vm.soundTimer[0] -= 1; }
+		}, 17);
 	});
 
 	const handleKeyDown = (event: KeyboardEvent) => {
