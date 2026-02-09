@@ -10,7 +10,7 @@ export type VirtualMachine = {
   delayTimer: Uint8Array;
   soundTimer: Uint8Array;
   v: Uint8Array[];
-  keypad: Uint8Array;
+  keypad: number | null;
 }
 
 export const createVM = () => {
@@ -24,7 +24,7 @@ export const createVM = () => {
     delayTimer: new Uint8Array(1),
     soundTimer: new Uint8Array(1),
     v: Array.from({length: 16}, (): Uint8Array => new Uint8Array(1)),
-    keypad: new Uint8Array(1),
+    keypad: null,
   };
 
   return VM;
