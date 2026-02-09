@@ -125,11 +125,10 @@ export const _8xy4 = (nibbles:number[], vm: VirtualMachine) => {
   console.log("...executing instruction 8xy4");
 
   let sum = vm.v[nibbles[1]][0] + vm.v[nibbles[2]][0];
+  vm.v[nibbles[1]][0] = sum % 256;
 
   if(sum > 255) { vm.v[0xf][0] = 1; }
   else { vm.v[0xf][0] = 0; }
-
-  vm.v[nibbles[1]][0] = sum % 256;
 
   console.log(`V${nibbles[1].toString(16)} + V${nibbles[2].toString(16)} = ${sum}`)
   console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0]}`)
@@ -142,12 +141,12 @@ export const _8xy5 = (nibbles:number[], vm: VirtualMachine) => {
   // if Vx - Vy < 0, set Vf = 0 and Vx = Vx - Vy
   console.log("...executing instruction 8xy5");
 
-  vm.v[0xf][0] = 1;
-
   let diff = vm.v[nibbles[1]][0] - vm.v[nibbles[2]][0];
-  if(diff < 0) { vm.v[0xf][0] = 0; }
-
   vm.v[nibbles[1]][0] = diff;
+  
+  if(diff < 0) { vm.v[0xf][0] = 0; }
+  else { vm.v[0xf][0] = 1; }
+
 
   console.log(`V${nibbles[1].toString(16)} - V${nibbles[2].toString(16)} = ${diff}`)
   console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0]}`)
@@ -166,8 +165,10 @@ export const _8xy6 = (nibbles:number[], vm: VirtualMachine) => {
   console.log(`Initial Value of V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
   console.log(`Initial Value of Vf: ${vm.v[0xf][0]}`)
 
-  vm.v[0xf][0] = vm.v[nibbles[1]][0] % 2;
+  let tmp = vm.v[nibbles[1]][0];
+
   vm.v[nibbles[1]][0] = vm.v[nibbles[1]][0] >> 1;
+  vm.v[0xf][0] = tmp % 2;
 
   console.log(`Final Value of V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
   console.log(`Final Value of Vf: ${vm.v[0xf][0]}`)
@@ -176,15 +177,15 @@ export const _8xy6 = (nibbles:number[], vm: VirtualMachine) => {
 export const _8xy7 = (nibbles:number[], vm: VirtualMachine) => {
   // Set Vx = Vy - Vx
   // Vf is initialized to 1
-  // if Vy - Vx < 0, set Vf = 0 and Vx = |Vy - Vx|
+  // if Vy - Vx < 0, set Vf = 0 and Vx = Vy - Vx
   console.log("...executing instruction 8xy7");
 
-  vm.v[0xf][0] = 1;
-
   let diff = vm.v[nibbles[2]][0] - vm.v[nibbles[1]][0];
-  if(diff < 0) { vm.v[0xf][0] = 0; }
-
   vm.v[nibbles[1]][0] = diff;
+  
+  if(diff < 0) { vm.v[0xf][0] = 0; }
+  else { vm.v[0xf][0] = 1; }
+
 
   console.log(`V${nibbles[2].toString(16)} - V${nibbles[1].toString(16)} = ${diff}`)
   console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0]}`)
@@ -203,10 +204,11 @@ export const _8xyE = (nibbles:number[], vm: VirtualMachine) => {
   console.log(`Initial Value of V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
   console.log(`Initial Value of Vf: ${vm.v[0xf][0]}`)
 
-  if(vm.v[nibbles[1]][0] > 127) { vm.v[0xf][0] = 1; }
-  else { vm.v[0xf][0] = 0; }
-
+  let tmp = vm.v[nibbles[1]][0];
   vm.v[nibbles[1]][0] = vm.v[nibbles[1]][0] << 1;
+
+  if(tmp > 127) { vm.v[0xf][0] = 1; }
+  else { vm.v[0xf][0] = 0; }
 
   console.log(`Final Value of V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
   console.log(`Final Value of Vf: ${vm.v[0xf][0]}`)
