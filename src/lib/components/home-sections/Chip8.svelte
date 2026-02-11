@@ -11,6 +11,7 @@
     { value: "ibm-logo", label: "IBM Logo" },
     { value: "corax-plus", label: "Corax+" },
     { value: "flags", label: "Flags" },
+    { value: "keypad", label: "Keypad" },
   ];
 
   let triggerContent = $derived(
