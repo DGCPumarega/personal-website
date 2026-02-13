@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CatBoxIdle from "$lib/assets/cat-box-idle.png";
+  import CatBoxIdle from "$lib/assets/spritesheets/cat-box-idle.png";
 </script>
 
 <div class="cat-box-idle" style="--spritesheet-url: url({CatBoxIdle})"></div>
