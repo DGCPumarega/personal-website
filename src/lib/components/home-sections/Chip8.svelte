@@ -17,27 +17,33 @@
   let triggerContent = $derived(
     availableRoms.find((f) => f.value === value)?.label ?? "Select a ROM"
   );
+
+  let {class: className}: {class?: string} = $props();
 </script>
 
-<section>
-  <h2 class="text-3xl text-center uppercase font-bold font-oxanium">CHIP-8 Emulator</h2>
-  <Select.Root type="single" bind:value>
-    <Select.Trigger>{triggerContent}</Select.Trigger>
-    <Select.Content>
-      {#each availableRoms as rom}
-        <Select.Item
-          value={rom.value}
-          label={rom.label}
-        >
-          {rom.label}
-        </Select.Item>
-      {/each}
-    </Select.Content>
-  </Select.Root>
-  <Button 
-    class="uppercase font-oxanium"
-    href="/chip-8/{value}"
-  >
-    Play
-  </Button>
+<section class="{className}">
+  <h2 class="text-xl sm:text-3xl text-center uppercase font-bold font-oxanium mb-3 leading-7">CHIP-8 Emulator</h2>
+  <div class="w-fit mx-auto mb-3">
+    <Select.Root type="single" bind:value>
+      <Select.Trigger class="">{triggerContent}</Select.Trigger>
+      <Select.Content>
+        {#each availableRoms as rom}
+          <Select.Item
+            value={rom.value}
+            label={rom.label}
+          >
+            {rom.label}
+          </Select.Item>
+        {/each}
+      </Select.Content>
+    </Select.Root>
+  </div>
+  <div class="w-fit mx-auto flex gap-x-2">
+    <Button class="uppercase font-oxanium" href="/chip-8/{value}">
+      Play
+    </Button>
+    <Button class="uppercase font-oxanium">
+      Info
+    </Button>
+  </div>
 </section>
