@@ -1,11 +1,13 @@
 <script lang="ts">
   import CatBoxIdle from "$lib/assets/spritesheets/cat-box-idle.png";
+
+  let {class: className}: {class?: string} = $props();
 </script>
 
-<div class="cat-box-idle" style="--spritesheet-url: url({CatBoxIdle})"></div>
+<div class={className} id="cat-box-idle" style="--spritesheet-url: url({CatBoxIdle})"></div>
 
 <style>
-  .cat-box-idle {
+  #cat-box-idle {
     background: var(--spritesheet-url);
     width: 32px;
     height: 32px;
