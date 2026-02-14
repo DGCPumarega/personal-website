@@ -12,11 +12,11 @@
     if(!canvas) { throw error(400, "Unable to load CHIP-8 display"); }
 
     ctx = canvas.getContext("2d");
-    if(!ctx) { throw error(400, "Unable to get CHIP-8 display context")}
+    if(!ctx) { throw error(400, "Unable to get CHIP-8 display context"); }
   });
 
   const draw = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
-    ctx.fillStyle = "red"
+    ctx.fillStyle = "black"
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     let pxw = canvas.width / 64;
@@ -40,13 +40,12 @@
   bind:this={canvas}
   width="640"
   height="320"
-  class="mx-auto"
 ></canvas>
 
 <style>
   #ch8-display {
-    width: 640px;
-    height: 320px;
+    width: calc(640px * 1.55);
+    height: calc(320px * 1.55);
     image-rendering: pixelated;
   }
 </style>
