@@ -10,7 +10,7 @@ export type VirtualMachine = {
   delayTimer: Uint8Array;
   soundTimer: Uint8Array;
   v: Uint8Array[];
-  keypad: number | null;
+  keypad: boolean[];
 }
 
 export const createVM = () => {
@@ -24,7 +24,7 @@ export const createVM = () => {
     delayTimer: new Uint8Array(1),
     soundTimer: new Uint8Array(1),
     v: Array.from({length: 16}, (): Uint8Array => new Uint8Array(1)),
-    keypad: null,
+    keypad: Array(16).fill(false),
   };
 
   return VM;
@@ -42,7 +42,7 @@ export const loadRom = (VM: VirtualMachine, romData: Uint8Array) => {
   }
 }
 
-export const runLoop = (VM: VirtualMachine) => {
+export const fetchDecodeExecute = (VM: VirtualMachine) => {
   // fetch
   let idx = VM.pc[0];
   let opcode = VM.memory[idx] << 8 | VM.memory[idx + 1];
@@ -116,4 +116,7 @@ export const runLoop = (VM: VirtualMachine) => {
     default:
       Instruction.unrecognized(nibbles); 
   }
+
+  if(VM.delayTimer[0] > 0) { VM.delayTimer[0] -= 1; }
+  if(VM.soundTimer[0] > 0) { VM.soundTimer[0] -= 1; }
 }

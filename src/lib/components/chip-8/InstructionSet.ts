@@ -22,7 +22,6 @@ export const _1nnn = (nibbles: number[], vm: VirtualMachine) => {
   // set program counter to nnn
 
   vm.pc[0] = (nibbles[1] << 4 | nibbles[2]) << 4 | nibbles[3];
-  console.log(`PC set to ${vm.pc[0].toString(16)}...`)
 };
 
 
@@ -117,8 +116,6 @@ export const _8xy5 = (nibbles:number[], vm: VirtualMachine) => {
   
   if(diff < 0) { vm.v[0xf][0] = 0; }
   else { vm.v[0xf][0] = 1; }
-
-
 }
 
 export const _8xy6 = (nibbles:number[], vm: VirtualMachine) => {
@@ -237,14 +234,18 @@ export const _Dxyn = (nibbles:number[], vm: VirtualMachine) => {
 
 export const _Ex9E = (nibbles:number[], vm: VirtualMachine) => {
   // Skip next instruction if key with value of vx is being pressed
+  console.log("executing Ex9E...")
+  console.log(`V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
 
-  if(vm.keypad === nibbles[1]) { vm.pc[0] += 2; }
+  if(vm.keypad[nibbles[1]]) { vm.pc[0] += 2; }
 }
 
 export const _ExA1 = (nibbles:number[], vm: VirtualMachine) => {
   // Skip next instruction if key with value of vx is NOT being pressed
+  console.log("executing ExA1...")
+  console.log(`V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
 
-  if(vm.keypad !== nibbles[1]) { vm.pc[0] += 2; }
+  if(!vm.keypad[nibbles[1]]) { vm.pc[0] += 2; }
 }
 
 export const _Fx07 = (nibbles:number[], vm: VirtualMachine) => {
@@ -255,8 +256,9 @@ export const _Fx07 = (nibbles:number[], vm: VirtualMachine) => {
 
 export const _Fx0A = (nibbles:number[], vm: VirtualMachine) => {
   // Wait for a key press, store the value of the key into Vx
+  console.log("executing Fx0A...")
 
-  if(vm.keypad !== null) { vm.v[nibbles[1]][0] = vm.keypad; }
+  if(vm.keypad.includes(true)) { vm.v[nibbles[1]][0] = vm.keypad.findIndex(val => val); }
   else { vm.pc[0] -= 2; } // undo the increment of PC from the fetch step
 }
 
@@ -285,7 +287,7 @@ export const _Fx29 = (nibbles:number[], vm: VirtualMachine) => {
 }
 
 export const _Fx33 = (nibbles:number[], vm: VirtualMachine) => {
-  // Store the Binary Coded Decimal representation of Vx at memory addresses stored in I, I+1, and I+2
+  // Store the Binary Coded Decimal representation of Vx at memory addresses I, I+1, and I+2
 
   let hundreds = Math.trunc(vm.v[nibbles[1]][0] / 100);
   let tens = Math.trunc(vm.v[nibbles[1]][0] / 10) % 10;
@@ -297,7 +299,7 @@ export const _Fx33 = (nibbles:number[], vm: VirtualMachine) => {
 }
 
 export const _Fx55 = (nibbles:number[], vm: VirtualMachine) => {
-  // Store registers V0 to Vx (inclusive) in memory starting at location I
+  // Store registers V0 to Vx (inclusive) in memory addresses starting at location I
 
   for(let idx = 0; idx <= nibbles[1]; idx++) {
     vm.memory[vm.i[0] + idx] = vm.v[idx][0];
