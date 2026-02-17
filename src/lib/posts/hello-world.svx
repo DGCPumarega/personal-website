@@ -1,0 +1,16 @@
+---
+title: Hello World!
+description: My first blog entry
+date: "February 16, 2026"
+isPublished: true
+---
+
+After months of procrastinating, I've finally gotten off my ass and started a personal website!
+
+I had a hard time thinking of a good design, though.
+I didn't want it to look too modern, because I kinda hate how the internet has become over the past decade. 
+Everything's gotten so boring and corporate, and I wanted to get away from that.
+But at the same time, I didn't want it to be too messy or chaotic either, cause then nobody would be able to navigate it.
+
+So, for better or for worse, this is what I came up with.
+Hopefully it's not too shit lol
