@@ -22,6 +22,7 @@
 		"bits-ui": "^2.15.4",
 		"clsx": "^2.1.1",
 		"formsnap": "^2.0.1",
+		"mdsvex": "^0.12.6",
 		"svelte": "^5.45.6",
 		"svelte-check": "^4.3.4",
 		"sveltekit-superforms": "^2.29.1",
