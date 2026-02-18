@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { Post } from "$lib/types";
-  import ChevronRight from "@lucide/svelte/icons/chevron-right";
 
   let {class: className, posts}: {class?: string, posts: Post[]} = $props();
 </script>
@@ -9,7 +8,7 @@
   <h2 class="text-xl sm:text-3xl text-center uppercase font-bold">Blog</h2>
   <ul class="flex flex-col gap-y-8">
     {#each posts as post}
-      <li class="flex gap-x-2 w-full hover:text-yellow-200 hover:font-semibold hover:bg-neutral-700 rounded-md p-2 pt-2.5">
+      <li class="flex gap-x-2 w-full hover:text-yellow-200 hover:font-semibold hover:bg-neutral-900 rounded-md p-2 pt-2.5">
         <span class="block leading-4 blink">&#10095;</span>
         <a class="w-full" href="/blog/{post.slug}">
           <span class="block text-lg leading-4">{post.title}</span>
