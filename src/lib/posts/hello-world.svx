@@ -5,12 +5,18 @@ date: "February 16, 2026"
 isPublished: true
 ---
 
-After months of procrastinating, I've finally gotten off my ass and started a personal website!
+After months of procrastinating, I'd finally gotten off my ass and started a personal website!
 
-I had a hard time thinking of a good design, though.
-I didn't want it to look too modern, because I kinda hate how the internet has become over the past decade. 
+I had a hard time thinking of a good design, though...  
+I didn't want it to look too modern, because I kind of hate how the internet has become over the past decade. 
 Everything's gotten so boring and corporate, and I wanted to get away from that.
-But at the same time, I didn't want it to be too messy or chaotic either, cause then nobody would be able to navigate it.
+But at the same time, I didn't want it to be too chaotic either, because then nobody would be able to navigate it.
 
-So, for better or for worse, this is what I came up with.
-Hopefully it's not too shit lol
+So, for better or for worse, this is what I came up with lol  
+
+I've tried to set up the website in such a way that it would be easy to toggle between themes.
+Right now, though, I just have one (the Space theme).
+Maybe once I have all the other components up and running properly, I'll go back and add more.
+
+I think an autumn theme would be nice to have one day.
+The bright warm colours would make it a good alternative for the light-mode users.
