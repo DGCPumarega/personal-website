@@ -2,6 +2,7 @@
   import type { PageProps } from "./$types";
   import { Separator } from "$lib/components/ui/separator";
   import BlogSidebar from "$lib/components/blog/BlogSidebar.svelte";
+  import { formatDate } from "$lib/utils";
 
   let { data }: PageProps = $props();
 </script>
@@ -11,7 +12,7 @@
 
   <article class="col-span-9 font-oxanium px-8!">
     <h2 class="font-bold text-3xl uppercase leading-5 mt-4">{data.meta.title}</h2>
-    <p class="italic">{data.meta.date}</p>
+    <p class="italic">{formatDate(data.meta.date)}</p>
     <Separator class="my-6"/>
     <div class="flex flex-col gap-y-5">
       <data.content />
