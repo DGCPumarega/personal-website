@@ -22,7 +22,7 @@
 </script>
 
 <section class="{className}">
-  <h2 class="text-xl sm:text-3xl text-center uppercase font-bold font-oxanium mb-3 leading-7">CHIP-8 Emulator</h2>
+  <h2 class="text-xl sm:text-3xl text-center uppercase font-bold mb-3 leading-7">My CHIP-8 Emulator</h2>
   <div class="w-fit mx-auto mb-3">
     <Select.Root type="single" bind:value>
       <Select.Trigger class="">{triggerContent}</Select.Trigger>
@@ -39,10 +39,10 @@
     </Select.Root>
   </div>
   <div class="w-fit mx-auto flex gap-x-2">
-    <Button class="uppercase font-oxanium" href="/chip-8/{value}">
+    <Button class="uppercase hover:bg-yellow-200 hover:text-black" href="/chip-8/{value}">
       Play
     </Button>
-    <Button class="uppercase font-oxanium">
+    <Button class="uppercase hover:bg-yellow-200 hover:text-black">
       Info
     </Button>
   </div>
