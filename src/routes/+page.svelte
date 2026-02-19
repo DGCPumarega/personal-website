@@ -11,18 +11,17 @@
   let { data }: PageProps = $props();
 </script>
 
-<div class="grid grid-cols-1 gap-2 mx-4 sm:grid-cols-3 lg:mx-auto lg:grid-cols-12 lg:grid-rows-6 lg:w-250">
+<div class="grid grid-cols-1 gap-2 mx-4 sm:grid-cols-3 lg:mx-auto lg:grid-cols-12 lg:grid-rows-8 lg:w-250">
   <Welcome class="sm:col-span-2 lg:col-span-9 lg:row-span-2" />
   <Blog posts={data.posts} class="lg:row-span-3 lg:col-span-3" />
   <Projects class="lg:row-span-2 lg:col-span-6" />
   <section class="flex flex-col align-middle justify-center lg:col-span-3 border-none! bg-transparent! p-0!">
-    <div class="w-full h-full">
-      <Computer />
-    </div>
     <h2 class="sr-only">Computer</h2>
+    <Computer class="w-full h-full" />
   </section>
   <Chip8 class="lg:col-span-3"/>
   <Outlinks class="lg:col-span-3" />
-  <Guestbook class="lg:col-span-6 lg:row-span-2"/>
+  <Guestbook class="lg:col-span-6 lg:row-span-4" formProp={data.form} />
   <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 3</section>
+  <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 4</section>
 </div>
