@@ -1,0 +1,1 @@
+ALTER TABLE "replies" ALTER COLUMN "message_id" SET NOT NULL;

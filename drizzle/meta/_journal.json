@@ -15,6 +15,13 @@
       "when": 1771524851552,
       "tag": "0001_strong_big_bertha",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1771529863707,
+      "tag": "0002_flawless_molecule_man",
+      "breakpoints": true
     }
   ]
 }
