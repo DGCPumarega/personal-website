@@ -22,7 +22,7 @@
     </p>
     <p>
       This place is <span class="text-yellow-300">still under construction</span>, but I hope you have fun exploring this website!
-      And don't forget to leave a comment or some constructive criticism in the 
+      And don't forget to leave a comment (or some constructive criticism) in the 
       <a class="text-blue-200 underline underline-offset-2" href="#guestbook">guestbook</a> 
       before you go!
     </p>
