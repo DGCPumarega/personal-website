@@ -1,9 +1,8 @@
-import { json } from '@sveltejs/kit'
-import type { Post } from "$lib/types";
-
+import type { BlogPost } from "$lib/types";
+import { json } from '@sveltejs/kit';
 
 const getPosts = async () => {
-	let posts: Post[] = [];
+	let posts: BlogPost[] = [];
 
 	const paths = import.meta.glob("/src/lib/posts/*.svx", { eager: true });
 
@@ -12,8 +11,8 @@ const getPosts = async () => {
 		const slug = path.split("/").at(-1)?.replace(".svx", "");
 
 		if (file && typeof file === "object" && "metadata" in file && slug) {
-			const metadata = file.metadata as Omit<Post, "slug">;
-			const post = { ...metadata, slug } satisfies Post;
+			const metadata = file.metadata as Omit<BlogPost, "slug">;
+			const post = { ...metadata, slug } satisfies BlogPost;
 
 			post.isPublished && posts.push(post);
 		}
