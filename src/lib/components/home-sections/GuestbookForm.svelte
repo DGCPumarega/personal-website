@@ -26,30 +26,47 @@
 </script>
 
 <form class={className} method="POST" use:enhance>
-  <Form.Field {form} name="username">
-    <div class="flex gap-x-2 w-full">
+  <div class="flex gap-x-2 w-full">
+    <Form.Field {form} name="username" class="w-full">
       <Form.Control>
-        <div class="flex flex-col gap-y-2 w-full">
-          <Form.Label class="block leading-3">
-            Username
-          </Form.Label>
-          <Input class="block bg-neutral-800" bind:value={$formData.username} />
-        </div>
+        {#snippet children({ props }: any)}
+          <div class="flex flex-col gap-y-2 w-full">
+            <Form.Label class="block leading-3">
+              Username
+            </Form.Label>
+            <Input {...props} class="block bg-neutral-800" bind:value={$formData.username} />
+          </div>
+        {/snippet}
       </Form.Control>
+      <Form.FieldErrors />
+    </Form.Field>
+
+    <Form.Field {form} name="email" class="w-full">
       <Form.Control>
-        <div class="flex flex-col gap-y-1 w-full">
-          <Form.Label class="block">
-            Email <span class="text-xs text-neutral-300 italic">(optional)</span>
-          </Form.Label>
-          <Input class="block bg-neutral-800" bind:value={$formData.email} />
-        </div>
+        {#snippet children({ props }: any)}
+          <div class="flex flex-col gap-y-1 w-full">
+            <Form.Label class="block">
+              Email <span class="text-xs text-neutral-300 italic">(optional)</span>
+            </Form.Label>
+            <Input {...props} class="block bg-neutral-800" bind:value={$formData.email} />
+          </div>
+        {/snippet}
       </Form.Control>
-    </div>
+      <Form.FieldErrors />
+    </Form.Field>
+  </div>
+
+  <Form.Field {form} name="message">
     <Form.Control>
-      <Form.Label>Message</Form.Label>
-      <Textarea class="bg-neutral-800" bind:value={$formData.message} />
+      {#snippet children({ props }: any)}
+        <div class="flex flex-col gap-y-1 mt-4">
+          <Form.Label>Message</Form.Label>
+          <Textarea {...props} class="bg-neutral-800" bind:value={$formData.message} />
+        </div>
+      {/snippet}
     </Form.Control>
     <Form.FieldErrors />
   </Form.Field>
-  <Form.Button>Submit</Form.Button>
+
+  <Form.Button class="mt-3">Submit</Form.Button>
 </form>
