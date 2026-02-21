@@ -1,7 +1,7 @@
 ---
 title: Hello World!
 description: My first blog entry
-date: "2026-02-16"
+date: "2026/02/16"
 isPublished: true
 ---
 
@@ -9,12 +9,12 @@ After months of procrastinating, I'd finally gotten off my ass and started a per
 
 I had a hard time thinking of a good design, though...  
 I didn't want it to look too modern, because I kind of hate how the internet has become over the past decade. 
-Everything's gotten so boring and corporate, and I wanted to get away from that.
+Everything's gotten so sterile and corporate, and I wanted to get away from that. 
 But at the same time, I didn't want it to be too chaotic either, because then nobody would be able to navigate it.
 
 So, for better or for worse, this is what I came up with lol  
 
-I've tried to set up the website in such a way that it would be easy to toggle between themes.
+I wasn't sure if this was going to be the final look of the website, so I've tried to set it up in such a way that it would be easy to toggle between themes in the future.
 Right now, though, I just have one (the Space theme).
 Maybe once I have all the other components up and running properly, I'll go back and add more.
 
