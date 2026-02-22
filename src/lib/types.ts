@@ -9,5 +9,7 @@ export type BlogPost = {
 export type GuestbookMessage = {
   username: string,
   content: string,
+  createdAt: Date,
+  email?: string,
   replies?: { username: string, content: string }[],
 }
