@@ -12,8 +12,8 @@ export type WithoutChildren<T> = T extends { children?: any } ? Omit<T, "childre
 export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
 export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?: U | null };
 
-export function formatDate(datestr: string, style: "short" | "long" = "long") {
-	let date = new Date(datestr);
+export function formatDate(dateParam: string | Date, style: "short" | "long" = "long") {
+	let date = new Date(dateParam);
 	return new Intl.DateTimeFormat(
 		"en-US", 
 		{ year: "numeric", month: style, day: "numeric" }
