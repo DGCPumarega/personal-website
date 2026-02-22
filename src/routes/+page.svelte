@@ -22,6 +22,6 @@
   <Chip8 class="lg:col-span-3"/>
   <Outlinks class="lg:col-span-3" />
   <Guestbook class="lg:col-span-6 lg:row-span-4" formProp={data.form} messages={data.guestbookMessages} />
-  <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 3</section>
-  <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 4</section>
+  <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 3: Spotify API</section>
+  <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 4: Credits</section>
 </div>

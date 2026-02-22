@@ -13,7 +13,7 @@
       I studied <span class="font-bold text-red-300">Software Development</span> at the <span class="font-bold text-red-300">Northern Alberta Institute of Technology (NAIT)</span> in Edmonton, and now I'm using what I've learned to make stuff on the internet! 
     </p>
     <p>
-      I was inspired to make my own website after coming across several 2000s-style pages hosted on places like 
+      I was inspired to make my own website after coming across a couple of personal blogs hosted on 
       <a class="text-blue-200 underline underline-offset-2" href="https://neocities.org/" target="_blank">Neocities</a> 
       and 
       <a class="text-blue-200 underline underline-offset-2" href="https://nekoweb.org/" target="_blank">Nekoweb</a>. 
