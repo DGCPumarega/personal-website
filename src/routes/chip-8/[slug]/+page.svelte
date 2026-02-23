@@ -7,13 +7,11 @@
 
 	let vm: VirtualMachine = $state(createVM());
 
-	// let input: number = $state(500);
-	// let frameRate: number = $state(500);
-
-
 	onMount(() => {
 		loadFontSet(vm, FONT_SET);
 		loadRom(vm, data.bytes);
+
+		if(data.title === "Keypad") { vm.memory[0x1FF] = 2; }
 
 		// TODO: set up more accurate clock
 		// TODO: allow user to configure frame rate
@@ -40,8 +38,8 @@
 			case "KeyV": vm.keypad[0xF] = true; break;
 			default: break;
 		}
-		console.log(`Keypad: ${vm.keypad}`);
-	}
+	};
+
 	const handleKeyUp = (event: KeyboardEvent) => { 
 		switch(event.code) {
 			case "Digit1": vm.keypad[0x1] = false; break;
@@ -62,25 +60,12 @@
 			case "KeyV": vm.keypad[0xF] = false; break;
 			default: break;
 		}
-		console.log(`Keypad: ${vm.keypad}`);
 	}
 
 	let { data }: PageProps = $props();
 </script>
 
 <section id="display-container" class="w-fit mx-auto">
-	<!--
-	<div class="mb-4">
-		<label for="frame-rate">Frame Rate</label>
-		<input class="border border-white" type="number" bind:value={input} />
-		<button
-			class="ml-1 border rounded-sm px-2 bg-neutral-100 text-black"
-			onclick={() => frameRate = input}
-		>
-			Submit
-		</button>
-	</div>
-	-->
 	<h2 class="font-oxanium font-bold text-center uppercase text-4xl bg-transparent mb-2">Now Playing: {data.title}</h2>
 	<Display pixels={vm.display} />
 </section>
@@ -89,6 +74,13 @@
 	on:keydown|preventDefault={handleKeyDown}
 	on:keyup|preventDefault={handleKeyUp}
 />
+
+<!--
+<svelte:window
+	on:keydown|preventDefault={handleKeyDown}
+	on:keyup|preventDefault={handleKeyUp}
+/>
+-->
 
 <style>
 	#display-container {

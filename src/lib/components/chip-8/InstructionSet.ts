@@ -235,7 +235,7 @@ export const _Dxyn = (nibbles:number[], vm: VirtualMachine) => {
 export const _Ex9E = (nibbles:number[], vm: VirtualMachine) => {
   // Skip next instruction if key with value of vx is being pressed
   console.log("executing Ex9E...")
-  console.log(`V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
+  console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0].toString(16)}`)
 
   if(vm.keypad[nibbles[1]]) { vm.pc[0] += 2; }
 }
@@ -243,7 +243,7 @@ export const _Ex9E = (nibbles:number[], vm: VirtualMachine) => {
 export const _ExA1 = (nibbles:number[], vm: VirtualMachine) => {
   // Skip next instruction if key with value of vx is NOT being pressed
   console.log("executing ExA1...")
-  console.log(`V${nibbles[1]}: ${vm.v[nibbles[1]][0]}`)
+  console.log(`V${nibbles[1].toString(16)}: ${vm.v[nibbles[1]][0].toString(16)}`)
 
   if(!vm.keypad[nibbles[1]]) { vm.pc[0] += 2; }
 }
