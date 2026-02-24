@@ -6,7 +6,7 @@
 </script>
 
 <div class="{className} font-oxanium">
-  <ul class="flex flex-col gap-y-2 h-full overflow-y-scroll">
+  <ul class="flex flex-col gap-y-2 h-full overflow-y-auto scrollable">
     {#each messages as message}
       <li class="p-2">
         <div class="mb-1 pb-1 leading-4 border-b border-b-yellow-200">
