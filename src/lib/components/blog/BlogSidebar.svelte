@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Post } from "$lib/types";
+  import type { BlogPost } from "$lib/types";
 
-  let {class: className, posts, slug}: {class?: string, posts: Post[], slug: string} = $props();
+  let {class: className, posts, slug}: {class?: string, posts: BlogPost[], slug: string} = $props();
 </script>
 
 <section class="{className}">
