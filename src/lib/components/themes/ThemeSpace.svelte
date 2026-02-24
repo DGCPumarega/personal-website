@@ -5,6 +5,13 @@
     size: number;
     isStatic: boolean;
   };
+
+  type Comet = {
+    x: number;
+    y: number;
+    fallDuration: number;
+    height: number;
+  };
   
   const NUM_STARS = 200;
   let stars: Star[] = Array.from({length: NUM_STARS}, (): Star => {
@@ -16,6 +23,21 @@
     };
   });
 
+  const NUM_COMETS = 7;
+  const comets: Comet[] = $state([]);
+  let delay = 10000;
+  let id = setInterval(() => {
+    comets.push({
+      x: (Math.random() * 100),
+      y: (Math.random() * 100),
+      fallDuration: 3 + (Math.random() * 7),
+      height: (Math.random() * 100)
+    });
+
+    if(comets.length > NUM_COMETS - 1) { clearInterval(id); }
+    else { delay = Math.random() * 10000; }
+  }, delay)
+
 	let { children } = $props();
 </script>
 
@@ -24,13 +46,17 @@
     {#each stars as star}
       <div
         class={star.isStatic ? "star" : "star active"} 
-        style="left:{star.x}%; top:{star.y}%; width:{star.size}px; height:{star.size}px">
-      </div>
+        style="left:{star.x}%; top:{star.y}%; width:{star.size}px; height:{star.size}px"
+      ></div>
     {/each}
-    <!--
-      TODO: comets
-      <div class="comets relative -z-10"></div>
-    -->
+    <div class="w-[90vw] h-[150vh] bg-transparent rotate-135 relative left-40">
+      {#each comets as comet}
+        <div
+          class="comet"
+          style="left:{comet.x}%; top:{comet.y}%; animation-duration:{comet.fallDuration}s; height:{comet.height}%;"
+        ></div>
+      {/each}
+    </div>
   </div>
   <div class="relative bg-transparent">
     {@render children()}
@@ -73,6 +99,29 @@
         transform: scale(1.2);
     }
   }
+
+  .comet {
+    position: absolute;
+    background: linear-gradient(#fff, transparent);
+    animation-name: comet-fall;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    width: 3px;
+  }
+  @keyframes comet-fall {
+    0% {
+      opacity: 0;
+      transform: translateY(200%) scaleY(0);
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(0) scaleY(1);
+    }
+  }
+
   :global(main div section, main section, main article) {
     background-color: black;
     opacity: 0.60;
@@ -81,5 +130,13 @@
     backdrop-filter: blur(12px);
     color: white;
     padding: 8px;
+  }
+  :global(.scrollable::-webkit-scrollbar) {
+    width: 4px;
+    background-color: transparent;
+  }
+  :global(.scrollable::-webkit-scrollbar-thumb) {
+    background-color: oklch(87% 0 0);
+    border-radius: 8px;
   }
 </style>
