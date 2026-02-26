@@ -13,7 +13,7 @@
   <article class="col-span-9 font-oxanium px-8! overflow-y-auto scrollable">
     <h2 class="font-bold text-3xl uppercase leading-5 mt-4">{data.meta.title}</h2>
     <p class="italic">{formatDate(data.meta.date)}</p>
-    <Separator class="my-6"/>
+    <Separator class="my-6 bg-yellow-200"/>
     <div class="flex flex-col gap-y-5">
       <data.content />
     </div>
