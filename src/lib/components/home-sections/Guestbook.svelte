@@ -18,6 +18,6 @@
 
 <section id="guestbook" class="{className} flex flex-col gap-y-4 sm:justify-between">
   <h2 class="text-xl sm:text-3xl text-center uppercase font-bold">Guestbook</h2>
-  <GuestbookMessages class="border border-white rounded-sm h-96 border-r-0 rounded-r-none" messages={messages} />
+  <GuestbookMessages class="border border-white rounded-sm h-[60%]"  messages={messages} />
   <GuestbookForm class="mb-4" formProp={formProp} />
 </section>
