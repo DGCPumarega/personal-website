@@ -136,7 +136,7 @@
     background-color: transparent;
   }
   :global(.scrollable::-webkit-scrollbar-thumb) {
-    background-color: oklch(87% 0 0);
+    background-color: oklch(92.4% 0.129 101.54);
     border-radius: 8px;
   }
 </style>
