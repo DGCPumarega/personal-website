@@ -1,4 +1,4 @@
-import { pgTable, serial, integer, text, timestamp } from 'drizzle-orm/pg-core';
+import { pgTable, serial, integer, text, timestamp, jsonb } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 export const messages = pgTable('messages', {
@@ -27,3 +27,11 @@ export const repliesRelations = relations(replies, ({ one }) => ({
 		references: [messages.id]
 	}),
 }))
+
+
+// KV Store
+export const tokens = pgTable('tokens', {
+	id: serial('id').primaryKey(),
+	createdAt: timestamp('created_at').notNull().defaultNow(),
+	data: jsonb('data').notNull(),
+});
