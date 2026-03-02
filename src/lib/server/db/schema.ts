@@ -1,4 +1,4 @@
-import { pgTable, serial, integer, text, timestamp, jsonb } from 'drizzle-orm/pg-core';
+import { pgTable, serial, integer, text, timestamp } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 export const messages = pgTable('messages', {
@@ -28,10 +28,13 @@ export const repliesRelations = relations(replies, ({ one }) => ({
 	}),
 }))
 
-
-// KV Store
+// Auth Token Store
 export const tokens = pgTable('tokens', {
 	id: serial('id').primaryKey(),
 	createdAt: timestamp('created_at').notNull().defaultNow(),
-	data: jsonb('data').notNull(),
+	accessToken: text('access_token').notNull(),
+	tokenType: text('token_type').notNull(),
+	expiresIn: integer('expires_in').notNull(),
+	refreshToken: text('refresh_token').notNull(),
+	scope: text('scope').notNull(),
 });
