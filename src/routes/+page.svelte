@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PageProps } from "./$types";
+
   import Welcome from "$lib/components/home-sections/Welcome.svelte"
   import Outlinks from "$lib/components/home-sections/Outlinks.svelte";
   import Projects from "$lib/components/home-sections/Projects.svelte";
@@ -7,11 +8,12 @@
   import Blog from "$lib/components/home-sections/Blog.svelte";
   import Guestbook from "$lib/components/home-sections/Guestbook.svelte";
   import Computer from "$lib/components/home-sections/Computer.svelte";
+  import Spotify from "$lib/components/home-sections/Spotify.svelte";
 
   let { data }: PageProps = $props();
 </script>
 
-<div class="grid grid-cols-1 gap-2 mx-4 sm:grid-cols-3 lg:mx-auto lg:grid-cols-12 lg:grid-rows-8 lg:w-250">
+<div class="grid grid-cols-1 gap-2 mx-4 sm:grid-cols-3 lg:mx-auto lg:grid-cols-12 lg:w-250">
   <Welcome class="sm:col-span-2 lg:col-span-9 lg:row-span-2" />
   <Blog posts={data.blogPosts} class="lg:row-span-3 lg:col-span-3" />
   <Projects class="lg:row-span-2 lg:col-span-6" />
@@ -22,6 +24,6 @@
   <Chip8 class="lg:col-span-3"/>
   <Outlinks class="lg:col-span-3" />
   <Guestbook class="lg:col-span-6 lg:row-span-4" formProp={data.form} messages={data.guestbookMessages} />
-  <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 3: Spotify API</section>
+  <Spotify class="lg:col-span-6 lg:row-span-2" />
   <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 4: Credits</section>
 </div>

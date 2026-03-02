@@ -5,19 +5,25 @@ import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 import { formSchema } from '$lib/components/home-sections/GuestbookSchema';
 import { getGuestbookMessages, postGuestbookMessage } from '$lib/components/home-sections/GuestbookQueries';
+import { loadSpotifyData } from '$lib/components/home-sections/SpotifyDataLoader';
 
-export const load: PageServerLoad = async ({ fetch }) => {
+export const load: PageServerLoad = async ({ fetch, url }) => {
   let blogPostsResponse = await fetch("/api/blog-posts");
   let blogPosts: BlogPost[] = await blogPostsResponse.json();
 
   let guestbookMessages = await getGuestbookMessages();
 
+  let { nowPlaying, recentTracks, topTracks } = await loadSpotifyData();
+
   return {
     blogPosts: blogPosts,
     guestbookMessages: guestbookMessages,
     form: await superValidate(zod4(formSchema)),
+    nowPlaying: nowPlaying,
+    recentTracks: recentTracks,
+    topTracks: topTracks,
   };
-}
+};
 
 export const actions: Actions = {
   default: async (event) => {
