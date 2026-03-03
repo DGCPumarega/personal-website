@@ -5,12 +5,12 @@ date: "2026/02/16"
 isPublished: true
 ---
 
-After months of procrastinating, I'd finally gotten off my ass and started a personal website!
+After months of procrastinating, I'd finally gotten around to starting a personal website! 🎉
 
 I had a hard time thinking of a good design, though...  
-I didn't want it to look too modern, because I kind of hate how the internet has become over the past decade. 
+I didn't want it to look too modern, cause I kind of hate the aesthetic that has been developing over the past decade or so. 
 Everything's gotten so sterile and corporate, and I wanted to get away from that. 
-But at the same time, I didn't want it to be too chaotic either, because then nobody would be able to navigate it.
+But at the same time, I didn't want my site to be too chaotic either, because then nobody would be able to navigate it.
 
 So, for better or for worse, this is what I came up with lol  
 
