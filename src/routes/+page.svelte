@@ -13,9 +13,12 @@
   let { data }: PageProps = $props();
 </script>
 
-<div class="grid grid-cols-1 gap-2 mx-4 sm:grid-cols-3 lg:mx-auto lg:grid-cols-12 lg:w-250">
+<div class="grid grid-cols-1 gap-2 mx-4 opacity-60 sm:grid-cols-3 lg:mx-auto lg:grid-cols-12 lg:w-250">
   <Welcome class="sm:col-span-2 lg:col-span-9 lg:row-span-2" />
-  <Blog posts={data.blogPosts} class="lg:row-span-3 lg:col-span-3" />
+  <Blog
+    class="lg:row-span-3 lg:col-span-3" 
+    posts={data.blogPosts}
+  />
   <Projects class="lg:row-span-2 lg:col-span-6" />
   <section class="flex flex-col align-middle justify-center lg:col-span-3 border-none! bg-transparent! p-0!">
     <h2 class="sr-only">Computer</h2>
@@ -23,7 +26,16 @@
   </section>
   <Chip8 class="lg:col-span-3"/>
   <Outlinks class="lg:col-span-3" />
-  <Guestbook class="lg:col-span-6 lg:row-span-4" formProp={data.form} messages={data.guestbookMessages} />
-  <Spotify class="lg:col-span-6 lg:row-span-2" />
+  <Guestbook
+    class="lg:col-span-6 lg:row-span-4"
+    formProp={data.form}
+    messages={data.guestbookMessages} 
+  />
+  <Spotify
+    class="lg:col-span-6"
+    nowPlaying={data.nowPlaying}
+    recentTracks={data.recentTracks}
+    topTracks={data.topTracks}
+  />
   <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 4: Credits</section>
 </div>
