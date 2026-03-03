@@ -103,7 +103,7 @@ const getNowPlaying = async (accessToken: string) => {
   else { return null; }
 }
 
-const getRecentTracks = async (accessToken: string, limit: number = 10) => {
+const getRecentTracks = async (accessToken: string, limit: number = 11) => {
   const response = await fetch(`https://api.spotify.com/v1/me/player/recently-played?limit=${limit}`, {
     headers: { "Authorization": `Bearer ${accessToken}` }
   });
@@ -141,7 +141,7 @@ const getRecentTracks = async (accessToken: string, limit: number = 10) => {
   else { return null; }
 }
 
-const getTopTracks = async (accessToken: string, limit: number = 10) => {
+const getTopTracks = async (accessToken: string, limit: number = 16) => {
   const response = await fetch(`https://api.spotify.com/v1/me/top/tracks?limit=${limit}`, {
     headers: { "Authorization": `Bearer ${accessToken}` }
   });
