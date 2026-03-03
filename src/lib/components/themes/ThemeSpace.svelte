@@ -123,8 +123,7 @@
   }
 
   :global(main div section, main section, main article) {
-    background-color: black;
-    opacity: 0.60;
+    background-color: rgba(0, 0, 0, 0.75);
     border: 2px solid white;
     border-radius: 2px;
     backdrop-filter: blur(12px);
