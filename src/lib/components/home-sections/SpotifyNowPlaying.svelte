@@ -19,10 +19,16 @@
       alt="album cover"
     />
     <div class="flex flex-col justify-between w-full">
-      <div class="flex gap-x-1">
-        <SpotifyMusicBars isPaused={false}/>
-        <h3 class="text-xl uppercase leading-4 w-fit text-nowrap ml-9">Now Playing</h3>
-        <SpotifyMusicBars isPaused={false}/>
+      <div class="flex flex-col gap-y-1.5">
+        <div class="flex gap-x-1">
+          <SpotifyMusicBars class="hidden sm:block" isPaused={false}/>
+          <h3 class="sm:text-xl uppercase leading-4 w-fit text-nowrap sm:ml-7">Now Playing</h3>
+          <SpotifyMusicBars class="hidden sm:block" isPaused={false}/>
+        </div>
+        <div class="flex gap-x-1">
+          <div class="w-2 h-2 rounded-full bg-green-600 self-center"></div>
+          <p class="text-xs uppercase">online</p>
+        </div>
       </div>
       <div>
         <p class="font-semibold text-lg overflow-x-clip text-nowrap">{nowPlaying.name}</p>

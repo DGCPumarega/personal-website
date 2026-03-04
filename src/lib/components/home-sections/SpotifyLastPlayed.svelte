@@ -15,10 +15,16 @@
   <div class="flex gap-x-4">
     <img class="w-30 h-30" src={recentTracks[0].covers[0]} alt="album cover" />
     <div class="flex flex-col justify-between w-full">
-      <div class="flex gap-x-1">
-        <SpotifyMusicBars isPaused={true} />
-        <h3 class="text-xl uppercase leading-4 w-fit text-nowrap ml-9">Last Played</h3>
-        <SpotifyMusicBars isPaused={true }/>
+      <div class="flex flex-col gap-y-1.5">
+        <div class="flex gap-x-1">
+          <SpotifyMusicBars class="hidden sm:block" isPaused={true} />
+          <h3 class="text-xl uppercase leading-4 w-fit text-nowrap sm:ml-7">Last Played</h3>
+          <SpotifyMusicBars class="hidden sm:block" isPaused={true }/>
+        </div>
+        <div class="flex gap-x-1">
+          <div class="w-2 h-2 rounded-full bg-red-600 self-center"></div>
+          <p class="text-xs uppercase">offline</p>
+        </div>
       </div>
       <div class="leading-5">
         <p class="font-semibold text-lg overflow-x-clip text-nowrap">{recentTracks[0].name}</p>
