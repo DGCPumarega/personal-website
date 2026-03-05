@@ -31,10 +31,10 @@
         </div>
       </div>
       <div>
-        <p class="font-semibold text-lg overflow-x-clip text-nowrap">{nowPlaying.name}</p>
-        <div class="flex gap-x-3 overflow-x-clip">
+        <p class="font-semibold text-lg text-nowrap">{nowPlaying.name}</p>
+        <div class="flex gap-x-3 flex-wrap ">
           {#each nowPlaying.artists as artist}
-            <p class="text-sm leading-2 italic">{artist}</p>
+            <p class="text-sm leading-4 italic text-nowrap">{artist}</p>
           {/each}
         </div>
       </div>
