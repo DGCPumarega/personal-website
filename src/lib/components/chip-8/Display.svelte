@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { error } from "@sveltejs/kit";
 
-  let { pixels }: { pixels: boolean[][] } = $props();
+  let { class: className, pixels }: { class: string, pixels: boolean[][] } = $props();
 
   let canvas: HTMLCanvasElement | null = $state(null);
   let ctx: CanvasRenderingContext2D | null = $state(null);
@@ -36,6 +36,7 @@
 </script>
 
 <canvas
+  class={className}
   id="ch8-display"
   bind:this={canvas}
   width="640"
