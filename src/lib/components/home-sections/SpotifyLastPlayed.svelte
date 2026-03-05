@@ -13,7 +13,7 @@
 
 <section class="{className} border-0! font-oxanium">
   <div class="flex gap-x-4">
-    <img class="w-30 h-30" src={recentTracks[0].covers[0]} alt="album cover" />
+    <img class="w-30 h-30 rounded-sm" src={recentTracks[0].covers[0]} alt="album cover" />
     <div class="flex flex-col justify-between w-full">
       <div class="flex flex-col gap-y-1.5">
         <div class="flex gap-x-1">
