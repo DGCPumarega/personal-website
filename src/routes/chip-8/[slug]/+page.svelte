@@ -66,21 +66,20 @@
 </script>
 
 <section id="display-container" class="w-fit mx-auto">
-	<h2 class="font-oxanium font-bold text-center uppercase text-4xl bg-transparent mb-2">Now Playing: {data.title}</h2>
-	<Display pixels={vm.display} />
+	<Display class="border" pixels={vm.display} />
+	<div class="flex justify-between font-oxanium mt-2">
+		<h2 class="font-bold uppercase bg-transparent text-4xl">Now Playing: {data.title}</h2>
+		<a class="text-xl self-center" href="/">
+			<span class="font-bold">←</span>
+			<span class="underline underline-offset-2 ">Back to Home</span>
+		</a>
+	</div>
 </section>
 
 <svelte:window
 	on:keydown|preventDefault={handleKeyDown}
 	on:keyup|preventDefault={handleKeyUp}
 />
-
-<!--
-<svelte:window
-	on:keydown|preventDefault={handleKeyDown}
-	on:keyup|preventDefault={handleKeyUp}
-/>
--->
 
 <style>
 	#display-container {
