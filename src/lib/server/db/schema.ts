@@ -5,7 +5,7 @@ export const messages = pgTable('messages', {
 	id: serial('id').primaryKey(),
 	username: text().notNull(),
 	createdAt: timestamp('created_at').notNull().defaultNow(),
-	email: text(),
+	website: text(),
 	content: text().notNull(),
 });
 

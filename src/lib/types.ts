@@ -10,8 +10,8 @@ export type GuestbookMessage = {
   username: string;
   content: string;
   createdAt: Date;
-  email?: string;
-  replies?: { username: string, content: string }[];
+  website?: string | null;
+  replies?: { username: string, content: string }[] | null;
 };
 
 export type SpotifyTrack = {

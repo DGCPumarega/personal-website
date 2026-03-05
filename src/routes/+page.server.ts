@@ -36,7 +36,7 @@ export const actions: Actions = {
       let message: Omit<GuestbookMessage, "createdAt"> = {
         username: form.data.username,
         content: form.data.message,
-        email: form.data.email,
+        website: form.data.website,
       };
 
       await postGuestbookMessage(message);

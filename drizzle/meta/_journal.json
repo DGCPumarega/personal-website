@@ -43,6 +43,13 @@
       "when": 1772245646056,
       "tag": "0005_outstanding_killer_shrike",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1772665370858,
+      "tag": "0006_rapid_lightspeed",
+      "breakpoints": true
     }
   ]
 }

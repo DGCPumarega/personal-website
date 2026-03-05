@@ -9,6 +9,7 @@ export const getGuestbookMessages = async () => {
     username: messages.username,
     createdAt: messages.createdAt,
     content: messages.content,
+    website: messages.website,
   })
   .from(messages)
   .orderBy(desc(messages.createdAt));

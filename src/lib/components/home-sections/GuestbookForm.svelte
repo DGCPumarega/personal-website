@@ -41,14 +41,14 @@
       <Form.FieldErrors />
     </Form.Field>
 
-    <Form.Field {form} name="email" class="w-full">
+    <Form.Field {form} name="website" class="w-full">
       <Form.Control>
         {#snippet children({ props }: any)}
           <div class="flex flex-col gap-y-1 w-full">
             <Form.Label class="block">
-              Email <span class="text-xs text-neutral-300 italic">(optional)</span>
+              Website <span class="text-xs text-neutral-300 italic">(optional)</span>
             </Form.Label>
-            <Input {...props} class="block bg-neutral-800" bind:value={$formData.email} />
+            <Input {...props} class="block bg-neutral-800" bind:value={$formData.website} />
           </div>
         {/snippet}
       </Form.Control>
