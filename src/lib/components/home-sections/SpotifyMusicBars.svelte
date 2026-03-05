@@ -1,19 +1,27 @@
 <script lang="ts">
   let { class: className, isPaused}: {class?: string, isPaused: boolean} = $props();
+
+  const NUM_BARS = 5;
+  let barHeights: number[] = $state([]);
+  for(let i = 0; i < NUM_BARS; i++) {
+    barHeights.push(Math.trunc(10+(Math.random()*10)));
+  }
 </script>
 
 <div class="{className} relative">
-  <div class="music-bar {isPaused ? 'inactive' : 'active'} absolute bottom-0.5 left-0"></div>
-  <div class="music-bar {isPaused ? 'inactive' : 'active'} absolute bottom-0.5 left-1.5"></div>
-  <div class="music-bar {isPaused ? 'inactive' : 'active'} absolute bottom-0.5 left-3"></div>
-  <div class="music-bar {isPaused ? 'inactive' : 'active'} absolute bottom-0.5 left-4.5"></div>
-  <div class="music-bar {isPaused ? 'inactive' : 'active'} absolute bottom-0.5 left-6"></div>
+  {#each barHeights as barHeight, idx}
+    <div
+      class="music-bar {isPaused ? 'inactive' : 'active'} absolute bottom-0.5"
+      style="left:{idx * 6}px; {isPaused ? `height:3px;` : `height:${barHeight}px;`}"
+    ></div>
+  {/each}
 </div>
 
 <style>
   .music-bar {
     width: 4px;
     border-radius: 4px;
+    transform-origin: bottom;
   }
 
   .active {
@@ -22,6 +30,7 @@
   }
 
   .inactive {
+    height: 3px;
     animation: inactive-bounce infinite alternate;
     background-color: oklch(70.4% 0.191 22.216);
   }
@@ -29,18 +38,18 @@
   @keyframes active-bounce {
     0% {
       opacity: 0.35;
-      height: 3px;
+      transform: scaleY(0.3);
     }
     100% {
       opacity: 1;
-      height: 15px;
+      transform: scaleY(1);
     }
   }
 
   @keyframes inactive-bounce {
     0% {
       opacity: 0.65;
-      height: 5px; 
+      height: 5px;
     }
     100% {
       opacity: 0.70;
