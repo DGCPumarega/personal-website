@@ -9,6 +9,7 @@
   import Guestbook from "$lib/components/home-sections/Guestbook.svelte";
   import Computer from "$lib/components/home-sections/Computer.svelte";
   import Spotify from "$lib/components/home-sections/Spotify.svelte";
+  import Gallery from "$lib/components/home-sections/Gallery.svelte";
 
   let { data }: PageProps = $props();
 </script>
@@ -27,7 +28,7 @@
   <Chip8 class="lg:col-span-3"/>
   <Outlinks class="lg:col-span-3" />
   <Guestbook
-    class="lg:col-span-6 lg:row-span-4"
+    class="lg:col-span-6 lg:row-span-2"
     formProp={data.form}
     messages={data.guestbookMessages} 
   />
@@ -37,5 +38,5 @@
     recentTracks={data.recentTracks}
     topTracks={data.topTracks}
   />
-  <section class="flex justify-center lg:col-span-6 lg:row-span-2">Placeholder 4: Credits</section>
+  <Gallery class="flex lg:col-span-6 h-68" />
 </div>
