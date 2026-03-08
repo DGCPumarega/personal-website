@@ -21,15 +21,6 @@
 <GLTF
   position={[0, 0, 0]}
   rotation.x={rotation} rotation.y={rotation} rotation.z={rotation}
-  scale={2.35}
+  scale={2}
   url="/models/IBM5155.glb"
 />
-
-<!--
-<Text 
-  text={"i luv compootr"}
-  scale={7}
-  position={[-2, -2.5, 0]}
-  textAlign={"center"}
-/>
--->
