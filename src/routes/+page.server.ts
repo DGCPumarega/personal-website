@@ -7,11 +7,14 @@ import { formSchema } from '$lib/components/home-sections/GuestbookSchema';
 import { getGuestbookMessages, postGuestbookMessage } from '$lib/components/home-sections/GuestbookQueries';
 import { loadSpotifyData } from '$lib/components/home-sections/SpotifyDataLoader';
 
-export const load: PageServerLoad = async ({ fetch, url }) => {
+export const load: PageServerLoad = async ({ fetch }) => {
   let blogPostsResponse = await fetch("/api/blog-posts");
   let blogPosts: BlogPost[] = await blogPostsResponse.json();
 
-  let guestbookMessages = await getGuestbookMessages();
+  let guestbookMessages = await getGuestbookMessages() as GuestbookMessage[];
+
+  let statusCafeResponse = await fetch("https://status.cafe/users/dgcpumarega/status.json")
+  let status = await statusCafeResponse.json();
 
   let { nowPlaying, recentTracks, topTracks } = await loadSpotifyData();
 
@@ -19,6 +22,7 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
     blogPosts: blogPosts,
     guestbookMessages: guestbookMessages,
     form: await superValidate(zod4(formSchema)),
+    status: status,
     nowPlaying: nowPlaying,
     recentTracks: recentTracks,
     topTracks: topTracks,
@@ -33,12 +37,12 @@ export const actions: Actions = {
       return fail(400, { form });
     }
     else {
-      let message: Omit<GuestbookMessage, "createdAt"> = {
+      let message: Omit<GuestbookMessage, "id" | "createdAt"> = {
         username: form.data.username,
         content: form.data.message,
-        website: form.data.website,
+        website: (form.data.website ? form.data.website : null),
+        replies: null,
       };
-
       await postGuestbookMessage(message);
     }
 
