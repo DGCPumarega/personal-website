@@ -13,9 +13,12 @@
   let currentStatus: Status | null = $state(null);
   onMount(() => {
     if(status.author && status.content && status.face && status.timeAgo) {
+      let tmp = document.createElement("textarea");
+      tmp.innerHTML = status.content;
+
       currentStatus = {
         author: status.author as string,
-        content: status.content as string,
+        content: tmp.value as string,
         face: status.face as string,
         timeAgo: status.timeAgo as string
       } as Status;
