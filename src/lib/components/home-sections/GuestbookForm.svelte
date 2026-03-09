@@ -26,7 +26,7 @@
 </script>
 
 <form class={className} method="POST" use:enhance>
-  <div class="flex gap-x-2 w-full">
+  <div class="flex flex-col sm:flex-row gap-2 w-full">
     <Form.Field {form} name="username" class="w-full">
       <Form.Control>
         {#snippet children({ props }: any)}

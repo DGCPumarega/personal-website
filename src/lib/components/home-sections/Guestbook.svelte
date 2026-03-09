@@ -17,12 +17,12 @@
 </script>
 
 <section id="guestbook" class="{className} flex flex-col gap-y-4 justify-between">
-  <div class="mb-4">
+  <div class="mb-4 lg:mb-0">
     <h2 class="text-xl sm:text-3xl text-center uppercase font-bold">Guestbook</h2>
     <p class="text-sm italic text-center leading-3">leave a message 
       <span class="text-neutral-300">(if u wanna)</span>!
     </p>
   </div>
-  <GuestbookMessages class="border border-white rounded-sm h-125" messages={messages} />
+  <GuestbookMessages class="border border-white rounded-sm h-125 lg:h-113" messages={messages} />
   <GuestbookForm class="mb-4" formProp={formProp} />
 </section>
