@@ -7,7 +7,7 @@
     <h2 class="text-xl sm:text-3xl text-center uppercase font-bold">Welcome</h2>
   </div>
   <div class="flex flex-col gap-y-4 leading-5">
-    <p>...to one of <span class="font-bold">the</span> websites of all time.</p>
+    <p>...to one of <span class="font-bold italic">the</span> websites of all time.</p>
     <p>
       I'm a (somewhat new) programmer currently living in <span class="font-bold text-red-300">Calgary, AB</span>. 
       I studied <span class="font-bold text-red-300">Software Development</span> at the <span class="font-bold text-red-300">Northern Alberta Institute of Technology (NAIT)</span> in Edmonton, and now I'm using what I've learned to make stuff on the internet! 
