@@ -11,7 +11,7 @@ export const messages = pgTable('messages', {
 
 export const replies = pgTable('replies', {
 	id: serial('id').primaryKey(),
-	messageId: integer().references(() => messages.id).notNull(),
+	messageId: integer('message_id').references(() => messages.id).notNull(),
 	username: text().notNull(),
 	createdAt: timestamp('created_at').notNull().defaultNow(),
 	content: text().notNull(),
