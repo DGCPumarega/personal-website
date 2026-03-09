@@ -41,7 +41,7 @@ export const actions: Actions = {
         username: form.data.username,
         content: form.data.message,
         website: (form.data.website ? form.data.website : null),
-        replies: null,
+        replies: [],
       };
       await postGuestbookMessage(message);
     }
