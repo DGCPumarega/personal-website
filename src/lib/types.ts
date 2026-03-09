@@ -7,12 +7,21 @@ export type BlogPost = {
 };
 
 export type GuestbookMessage = {
+  id: number;
   username: string;
   content: string;
   createdAt: Date;
-  website?: string | null;
-  replies?: { username: string, content: string }[] | null;
+  website: string | null;
+  replies: GuestbookReply[];
 };
+
+export type GuestbookReply = {
+  id: number;
+  messageId: number;
+  username: string;
+  content: string;
+  createdAt: Date;
+}
 
 export type SpotifyTrack = {
   id: string;
