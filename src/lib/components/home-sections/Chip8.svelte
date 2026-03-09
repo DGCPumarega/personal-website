@@ -40,7 +40,7 @@
   </div>
   <div class="mb-3">
     <Select.Root type="single" bind:value>
-      <Select.Trigger class="w-full">{triggerContent}</Select.Trigger>
+      <Select.Trigger class="w-full mt-4">{triggerContent}</Select.Trigger>
       <Select.Content class="bg-black border-white text-white -top-1.5 opacity-85">
         {#each availableRoms as rom}
           <Select.Item
@@ -55,7 +55,7 @@
   </div>
   <Button
     disabled={triggerContent === "Select a ROM" || triggerContent === "Keypad"}
-    class="w-full uppercase hover:bg-yellow-200 hover:text-black" href="/chip-8/{value}"
+    class="w-full mt-1 uppercase hover:bg-yellow-200 hover:text-black" href="/chip-8/{value}"
   >
     Play
   </Button>
@@ -67,6 +67,6 @@
   }
   @keyframes infinite-scroll {
     from { transform: translateX(0); }
-    to{ transform: translateX(-48%); }
+    to { transform: translateX(-48%); }
   }
 </style>
