@@ -36,8 +36,9 @@
 				</svg>
 			</a>
 		</div>
-		<div class="text-white font-oxanium flex gap-x-2 text-sm justify-center font-light">
+		<div class="text-white font-oxanium flex gap-x-3 text-sm justify-center font-light">
 			<p>DGCPumarega</p>
+			<p class="text-yellow-200 font-bold">|</p>
 			<p>2026</p>
 		</div>
 	</footer>
