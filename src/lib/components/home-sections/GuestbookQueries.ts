@@ -1,7 +1,7 @@
 import type { GuestbookMessage, GuestbookReply } from "$lib/types";
 import { db } from "$lib/server/db";
 import { messages, replies } from "$lib/server/db/schema";
-import { eq, desc } from "drizzle-orm";
+import { desc } from "drizzle-orm";
 
 export const getGuestbookMessages = async () => {
   let messagesQueryResult = await db
@@ -32,3 +32,7 @@ export const getGuestbookMessages = async () => {
 export const postGuestbookMessage = async (message: Omit<GuestbookMessage, "id" | "createdAt">) => {
   return await db.insert(messages).values(message).returning({ id: messages.id });
 };
+
+export const postGuestbookReply = async (reply: Omit<GuestbookReply, "id" | "createdAt">) => {
+  return await db.insert(replies).values(reply).returning({ id: replies.id });
+}

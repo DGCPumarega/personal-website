@@ -1,18 +1,20 @@
 <script lang="ts">
   import type { SuperValidated, Infer } from "sveltekit-superforms";
   import type { GuestbookMessage } from "$lib/types";
-  import type { FormSchema } from "$lib/components/home-sections/GuestbookSchema";
+  import type { MessageFormSchema, ReplyFormSchema } from "$lib/components/home-sections/GuestbookSchema";
   import GuestbookMessages from "$lib/components/home-sections/GuestbookMessages.svelte";
   import GuestbookForm from "$lib/components/home-sections/GuestbookForm.svelte";
 
   let {
     class: className,
     messages,
-    formProp,
+    messageFormProp,
+    replyFormProp,
   }: { 
     class?: string,
     messages: GuestbookMessage[],
-    formProp: SuperValidated<Infer<FormSchema>>
+    messageFormProp: SuperValidated<Infer<MessageFormSchema>>,
+    replyFormProp: SuperValidated<Infer<ReplyFormSchema>>,
   } = $props();
 </script>
 
@@ -20,9 +22,9 @@
   <div class="mb-4 lg:mb-0">
     <h2 class="text-xl sm:text-3xl text-center uppercase font-bold">Guestbook</h2>
     <p class="text-sm italic text-center leading-3">leave a message 
-      <span class="text-neutral-300">(if u wanna)</span>!
+      <span class="text-neutral-400">(if u wanna)</span>!
     </p>
   </div>
-  <GuestbookMessages class="border border-white rounded-sm h-125 lg:h-113" messages={messages} />
-  <GuestbookForm class="mb-4" formProp={formProp} />
+  <GuestbookMessages class="border border-white rounded-sm h-125 lg:h-113" messages={messages} replyFormProp={replyFormProp} />
+  <GuestbookForm class="mb-4" messageFormProp={messageFormProp} />
 </section>

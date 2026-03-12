@@ -29,7 +29,8 @@
   <Outlinks class="col-span-12 sm:col-span-4 lg:col-span-3" />
   <Guestbook
     class="col-span-12 lg:col-span-6 lg:row-span-2"
-    formProp={data.form}
+    messageFormProp={data.messageForm}
+    replyFormProp={data.replyForm}
     messages={data.guestbookMessages} 
   />
   <Status class="col-span-12 lg:col-span-6" status={data.status}/>

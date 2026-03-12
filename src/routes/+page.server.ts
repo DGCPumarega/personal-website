@@ -1,10 +1,24 @@
-import type { PageServerLoad, Actions } from './$types';
-import type { BlogPost, GuestbookMessage } from "$lib/types";
+import type { 
+  PageServerLoad,
+  Actions
+} from './$types';
+import type {
+  BlogPost,
+  GuestbookMessage,
+  GuestbookReply,
+} from "$lib/types";
 import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
-import { formSchema } from '$lib/components/home-sections/GuestbookSchema';
-import { getGuestbookMessages, postGuestbookMessage } from '$lib/components/home-sections/GuestbookQueries';
+import {
+  messageFormSchema,
+  replyFormSchema,
+} from '$lib/components/home-sections/GuestbookSchema';
+import {
+  getGuestbookMessages,
+  postGuestbookMessage,
+  postGuestbookReply,
+} from '$lib/components/home-sections/GuestbookQueries';
 import { loadSpotifyData } from '$lib/components/home-sections/SpotifyDataLoader';
 
 export const load: PageServerLoad = async ({ fetch }) => {
@@ -21,7 +35,8 @@ export const load: PageServerLoad = async ({ fetch }) => {
   return {
     blogPosts: blogPosts,
     guestbookMessages: guestbookMessages,
-    form: await superValidate(zod4(formSchema)),
+    messageForm: await superValidate(zod4(messageFormSchema)),
+    replyForm: await superValidate(zod4(replyFormSchema)),
     status: status,
     nowPlaying: nowPlaying,
     recentTracks: recentTracks,
@@ -30,22 +45,37 @@ export const load: PageServerLoad = async ({ fetch }) => {
 };
 
 export const actions: Actions = {
-  default: async (event) => {
-    const form = await superValidate(event, zod4(formSchema));
+  message: async (event) => {
+    const messageForm = await superValidate(event, zod4(messageFormSchema));
 
-    if(!form.valid) { 
-      return fail(400, { form });
-    }
-    else {
-      let message: Omit<GuestbookMessage, "id" | "createdAt"> = {
-        username: form.data.username,
-        content: form.data.message,
-        website: (form.data.website ? form.data.website : null),
-        replies: [],
-      };
-      await postGuestbookMessage(message);
+    if(!messageForm.valid) { 
+      return fail(400, { messageForm });
     }
 
-    return { form };
-  }
-}
+    let message: Omit<GuestbookMessage, "id" | "createdAt"> = {
+      username: messageForm.data.username,
+      content: messageForm.data.content,
+      website: (messageForm.data.website ? messageForm.data.website : null),
+      replies: [],
+    };
+
+    await postGuestbookMessage(message);
+    return { messageForm };
+  },
+  reply: async (event) => {
+    const replyForm = await superValidate(event, zod4(replyFormSchema));
+
+    if(!replyForm.valid) {
+      return fail(400, { replyForm });
+    }
+
+    let reply: Omit<GuestbookReply, "id" | "createdAt"> = {
+      messageId: replyForm.data.messageId,
+      username: replyForm.data.username,
+      content: replyForm.data.content,
+    };
+
+    await postGuestbookReply(reply);
+    return { replyForm };
+  },
+};
