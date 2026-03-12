@@ -1,7 +1,6 @@
 <script lang="ts">
   import { replyFormSchema, type ReplyFormSchema } from "$lib/components/home-sections/GuestbookSchema";
   import type { GuestbookMessage } from "$lib/types";
-  import { onMount } from "svelte";
   import { 
     type SuperValidated,
     type Infer,
@@ -13,7 +12,6 @@
   import { Textarea } from "$lib/components/ui/textarea";
   import { Input } from "$lib/components/ui/input";
   import { formatDate } from "$lib/utils";
-  import { invalidateAll } from "$app/navigation";
 
   let {
     class: className,
@@ -34,9 +32,9 @@
   type RepliableMessage = GuestbookMessage & { toggleReply: boolean };
   let repliableMessages: RepliableMessage[] = $state([]);
 
-  onMount(() => {
-    messages.forEach(message => {
-      repliableMessages.push({...message, toggleReply: false})
+  $effect(() => {
+    repliableMessages = messages.map(message => {
+      return({ ...message, toggleReply: false })
     });
   });
 
