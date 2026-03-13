@@ -23,9 +23,9 @@
     };
   });
 
-  const NUM_COMETS = 7;
+  const NUM_COMETS = 5;
   const comets: Comet[] = $state([]);
-  let delay = 10000;
+  let delay = 5000;
   let id = setInterval(() => {
     comets.push({
       x: (Math.random() * 100),
@@ -35,7 +35,7 @@
     });
 
     if(comets.length > NUM_COMETS - 1) { clearInterval(id); }
-    else { delay = Math.random() * 10000; }
+    else { delay = 5000 + (Math.random() * 5000); }
   }, delay)
 
 	let { children } = $props();
