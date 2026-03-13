@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as Select from "$lib/components/ui/select";
+  import * as Popover from "$lib/components/ui/popover";
   import { Button } from "$lib/components/ui/button";
 
   let value = $state("");
@@ -40,7 +41,47 @@
   </div>
   <div class="mb-3">
     <Select.Root type="single" bind:value>
-      <Select.Trigger class="w-full mt-4">{triggerContent}</Select.Trigger>
+      <div class="flex gap-x-2">
+        <Select.Trigger class="w-full mt-4">{triggerContent}</Select.Trigger>
+        <Popover.Root>
+          <Popover.Trigger class="self-center mt-4 group">
+            <svg class="h-7" viewBox="0 0 24 24" fill="none">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+              <g id="SVGRepo_iconCarrier">
+                <circle class="stroke-yellow-200 group-hover:stroke-amber-400" cx="12" cy="12" r="10" stroke-width="1"/>
+                <path class="stroke-yellow-200 group-hover:stroke-amber-400" d="M12 17V11" stroke-width="1" stroke-linecap="round"/> 
+                <circle class="fill-yellow-200 group-hover:fill-amber-400" cx="1" cy="1" r="1" transform="matrix(1 0 0 -1 11 9)" /> 
+              </g>
+            </svg>
+          </Popover.Trigger>
+          <Popover.Content class="flex flex-col gap-y-2 text-sm font-light bg-black border-white text-white opacity-85 scrollable max-h-[30vh] overflow-y-auto">
+            <p>
+              The 
+              <a class="text-blue-200 underline underline-offset-2" href="https://en.wikipedia.org/wiki/CHIP-8" target="_blank">
+                CHIP-8 
+              </a> 
+              is an interpreted programming language that was used in microcomputers back in the 70s and 80s.
+            </p>
+            <p>
+              I started this project to learn more about 
+              <a class="text-blue-200 underline underline-offset-2" href="https://www.reddit.com/r/EmuDev/" target="_blank">
+                emulation development
+              </a>
+              , but I'm having trouble getting it to work properly lmao
+            </p>
+            <p>
+              At the moment, it's capable of reading CHIP-8 ROMs and displaying output, but I'm having trouble getting it to take keyboard input.
+            </p>
+            <p>
+              Since it's not working properly yet, the ROMs provided here are just Test ROMs from 
+              <a class="text-blue-200 underline underline-offset-2" href="https://github.com/Timendus/chip8-test-suite" target="_blank">
+                Timendus
+              </a>.
+            </p>
+          </Popover.Content>
+        </Popover.Root>
+      </div>
       <Select.Content class="bg-black border-white text-white -top-1.5 opacity-85">
         {#each availableRoms as rom}
           <Select.Item
