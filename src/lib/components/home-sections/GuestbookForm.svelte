@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as Form from "$lib/components/ui/form";
   import { Input } from "$lib/components/ui/input";
+  import { Spinner } from "$lib/components/ui/spinner";
   import { Textarea } from "$lib/components/ui/textarea";
   import { 
     type SuperValidated,
@@ -18,8 +19,11 @@
     messageFormProp: SuperValidated<Infer<MessageFormSchema>>
   } = $props();
 
+  let isVisibleSpinner = $state(false);
   const form = superForm(messageFormProp, {
     validators: zod4Client(messageFormSchema),
+    onSubmit: () => { isVisibleSpinner = true; },
+    onUpdated: () => { isVisibleSpinner = false; },
   });
 
   const { form: formData, enhance } = form;
@@ -68,5 +72,8 @@
     <Form.FieldErrors />
   </Form.Field>
 
-  <Form.Button class="mt-3 hover:bg-yellow-200 hover:text-black">Submit</Form.Button>
+  <div class="flex justify-between">
+    <Spinner class="size-7 self-center mt-3 ml-1 text-yellow-200 {isVisibleSpinner ? "block" : "invisible"}" /> 
+    <Form.Button class="mt-3 hover:bg-yellow-200 hover:text-black">Submit</Form.Button>
+  </div>
 </form>

@@ -11,6 +11,7 @@
   import { Button } from "$lib/components/ui/button";
   import { Textarea } from "$lib/components/ui/textarea";
   import { Input } from "$lib/components/ui/input";
+  import { Spinner } from "$lib/components/ui/spinner";
   import { formatDate } from "$lib/utils";
 
   let {
@@ -23,8 +24,11 @@
     replyFormProp: SuperValidated<Infer<ReplyFormSchema>>,
   } = $props();
 
+  let isVisibleSpinner = $state(false);
   const form = superForm(replyFormProp, {
     validators: zod4Client(replyFormSchema),
+    onSubmit: () => { isVisibleSpinner = true; },
+    onUpdated: () => { isVisibleSpinner = false; },
   });
 
   const { form: formData, enhance, reset } = form;
@@ -107,19 +111,22 @@
                 <Form.FieldErrors />
               </Form.Field>
 
-              <div class="flex gap-x-1 w-full justify-end">
-                <Form.Button
-                  class="hover:bg-yellow-200 hover:text-black"
-                >
-                  Submit
-                </Form.Button>
-                <Button
-                  class="hover:bg-yellow-200 hover:text-black"
-                  onclick={() => message.toggleReply = false}
-                >
-                  Cancel
-                </Button>
-              </div>
+              <div class="flex gap-x-1 w-full justify-between">
+                <Spinner class="size-7 self-center ml-1 text-yellow-200 {isVisibleSpinner ? "block" : "invisible"}" /> 
+                <div>
+                  <Form.Button
+                    class="hover:bg-yellow-200 hover:text-black"
+                  >
+                    Submit
+                  </Form.Button>
+                  <Button
+                    class="hover:bg-yellow-200 hover:text-black"
+                    onclick={() => message.toggleReply = false}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+                </div>
             </div>
           </form>
         {/if}
