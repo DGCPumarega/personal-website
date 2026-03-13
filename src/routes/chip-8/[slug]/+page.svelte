@@ -65,7 +65,7 @@
 	let { data }: PageProps = $props();
 </script>
 
-<section id="display-container" class="w-fit mx-auto">
+<section id="display-container" class="w-fit mx-auto min-h-[90vh]">
 	<Display class="border" pixels={vm.display} />
 	<div class="flex justify-between font-oxanium mt-2">
 		<h2 class="font-bold uppercase bg-transparent text-4xl">Now Playing: {data.title}</h2>

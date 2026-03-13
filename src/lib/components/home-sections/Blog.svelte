@@ -6,7 +6,7 @@
 
 <section class="{className} font-oxanium flex flex-col gap-y-2">
   <h2 class="text-xl sm:text-3xl text-center uppercase font-bold">Blog</h2>
-  <ul class="flex flex-col gap-y-8">
+  <ul class="flex flex-col gap-y-1">
     {#each posts as post}
       <li class="flex gap-x-2 w-full hover:text-yellow-200 hover:font-semibold hover:bg-neutral-900 rounded-md p-2 pt-2.5">
         <span class="block leading-4 blink">&#10095;</span>
