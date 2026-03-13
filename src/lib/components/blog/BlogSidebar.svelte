@@ -4,8 +4,8 @@
   let {class: className, posts, slug}: {class?: string, posts: BlogPost[], slug: string} = $props();
 </script>
 
-<section class="{className}">
-  <h2 class="font-oxanium text-xl sm:text-3xl text-center uppercase font-bold mt-2 mb-3">All Posts</h2>
+<section class="{className} font-oxanium">
+  <h2 class="text-xl sm:text-3xl text-center uppercase font-bold mt-2 mb-3">All Posts</h2>
   <ul class="flex flex-col gap-y-1">
     {#each posts as post}
       <li class="flex gap-x-2 w-full {post.slug === slug ? 'text-yellow-200 font-semibold bg-neutral-900 rounded-md' : '' } p-2 pt-2.5">

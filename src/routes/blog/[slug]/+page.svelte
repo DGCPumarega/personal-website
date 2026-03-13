@@ -7,7 +7,7 @@
   let { data }: PageProps = $props();
 </script>
 
-<div class="grid grid-cols-12 gap-x-2 min-h-[85vh] mx-4 sm:mx-auto lg:w-250">
+<div class="grid grid-cols-12 gap-x-2 h-[85vh] mx-4 sm:mx-auto lg:w-250">
   <BlogSidebar class="col-span-3 overflow-y-auto scrollable opacity-60" posts={data.posts} slug={data.slug} />
   <article class="col-span-9 font-oxanium px-8! overflow-y-auto scrollable opacity-60">
     <h2 class="font-bold text-3xl uppercase leading-5 mt-4">{data.meta.title}</h2>
