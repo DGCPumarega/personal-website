@@ -15,7 +15,7 @@ Back when I started, I remember thinking that this was gonna be a quick and easy
 I'm not as good a developer as I'd like to think lmao
 
 Looking back, one of the things I underestimated was the difficulty of implementing CSS styles and animations. 
-I had to go through tons of CodePens and Mozilla documentation to figure out how to do things such as infinite horizontal scrolling, animated backgrounds, and customizing the scrollbar for overflowing components.
+I had to go through tons of CodePens and Mozilla documentation to figure out how to do things like infinite horizontal scrolling, animated backgrounds, and scrollbar customization.
 Though I ended up not using it for this initial version of the site, I also looked into animating spritesheets with CSS.
 
 
@@ -27,16 +27,21 @@ Though I ended up not using it for this initial version of the site, I also look
 I encountered some challenges while creating the Spotify component as well.
 After a sucessful auth, the access and refresh tokens from the Spotify API are typically stored as cookies.
 However, I was reluctant to do this 'cause I didn't want to create a cookie policy and consent form.
-In the end, I was able to circumvent this issue this by creating a token store in Supabase.
-It's probably not the most optimal solution (compared to other options such as Redis), but I don't think it's gonna be an issue. 
+I was able to circumvent this issue this by storing my tokens in a Supabase Postgres table.
+It's probably not the most optimal solution (compared to other options such as a Redis KV store), but I don't think it's gonna be an issue. 
 This is a low-traffic personal website, not Twitter lol
 
 As for the guestbook, it took me while to get Superforms to work on my site.
-Nothing wrong with the library, it was pretty much a skill issue (lmao). 
+Nothing wrong with the library though, it was pretty much a skill issue lmao. 
 Once I figured it out though, I found it very convenient. 
 Paired with Zod and shadcn-svelte, it was easy to validate user input, display error messages, and ensure accessibility.
 
-TL;DR: I thought that making a personal site was gonna be easy, but it was more complicated than I thought.
+Anyway, I should probably cut it here. 
+I don't even want to get started on the problems I have with my CHIP-8 Emulator lol
+
+<span class="text-yellow-400">
+  TL;DR: I thought that making a personal site was gonna be easy, but it was more complicated than I thought.
+</span>
 
 Feels good to get this initial version up, but there's still more to be done.
 Next up on the list is a top navbar.
