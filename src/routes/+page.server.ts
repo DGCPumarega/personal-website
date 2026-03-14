@@ -25,7 +25,10 @@ export const load: PageServerLoad = async ({ fetch }) => {
   let blogPostsResponse = await fetch("/api/blog-posts");
   let blogPosts: BlogPost[] = await blogPostsResponse.json();
 
-  let guestbookMessages = await getGuestbookMessages() as GuestbookMessage[];
+  let guestbookMessages: GuestbookMessage[] | null = null;
+  try {
+    guestbookMessages = await getGuestbookMessages() as GuestbookMessage[];
+  } catch { guestbookMessages = null; }
 
   let statusCafeResponse = await fetch("https://status.cafe/users/dgcpumarega/status.json")
   let status = await statusCafeResponse.json();

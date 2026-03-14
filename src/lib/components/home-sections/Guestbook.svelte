@@ -12,7 +12,7 @@
     replyFormProp,
   }: { 
     class?: string,
-    messages: GuestbookMessage[],
+    messages: GuestbookMessage[] | null,
     messageFormProp: SuperValidated<Infer<MessageFormSchema>>,
     replyFormProp: SuperValidated<Infer<ReplyFormSchema>>,
   } = $props();
