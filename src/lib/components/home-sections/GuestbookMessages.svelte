@@ -25,9 +25,19 @@
   } = $props();
 
   let isVisibleSpinner = $state(false);
+  let isFlaggedAsBot = $state(false);
+  let honeypot = $state("");
+
   const form = superForm(replyFormProp, {
     validators: zod4Client(replyFormSchema),
-    onSubmit: () => { isVisibleSpinner = true; },
+    onSubmit: ({ cancel }) => {
+      isVisibleSpinner = true;
+      if(honeypot) {
+        cancel();
+        isVisibleSpinner = false;
+        isFlaggedAsBot = true;
+      }
+    },
     onUpdated: () => { isVisibleSpinner = false; },
   });
 
@@ -82,8 +92,10 @@
 
         {#if message.toggleReply}
           <form method="POST" action="?/reply" use:enhance>
+            <input name="email" id="email" class="hny" autocomplete="off" aria-hidden="true" bind:value={honeypot} />
+
             <div class="flex flex-col gap-y-1 bg-neutral-600 border border-white mt-4 rounded-sm p-4 font-sans">
-              <input class="hidden" name="messageId" value={message.id} />
+              <input class="hidden" name="messageId" autocomplete="off" aria-hidden="true" value={message.id} />
 
               <Form.Field {form} name="username" class="w-full">
                 <Form.Control>
@@ -113,6 +125,9 @@
 
               <div class="flex gap-x-1 w-full justify-between">
                 <Spinner class="size-7 self-center ml-1 text-yellow-200 {isVisibleSpinner ? "block" : "invisible"}" /> 
+                <p class="text-red-400 {isFlaggedAsBot ? "block" : "hidden"}">
+                  Unable to Send Message: Flagged as Bot
+                </p>
                 <div>
                   <Form.Button
                     class="hover:bg-yellow-200 hover:text-black"
@@ -144,3 +159,9 @@
     {/each}
   </ul>
 </div>
+
+<style>
+  .hny {
+    display: none;
+  }
+</style>
