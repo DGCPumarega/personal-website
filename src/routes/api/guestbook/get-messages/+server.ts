@@ -38,7 +38,7 @@ export const GET: RequestHandler = async ({ platform }) => {
     });
 
     message.replies.sort((first, second) =>
-      second.createdAt.getTime() - first.createdAt.getTime()
+      first.createdAt.getTime() - second.createdAt.getTime()
     );
   });
 
