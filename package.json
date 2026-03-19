@@ -19,6 +19,7 @@
     "cf-typegen": "wrangler types"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260313.1",
     "@internationalized/date": "^3.10.1",
     "@lucide/svelte": "^0.561.0",
     "@sveltejs/adapter-cloudflare": "^7.2.6",
@@ -28,7 +29,7 @@
     "@types/node": "^22",
     "bits-ui": "^2.15.4",
     "clsx": "^2.1.1",
-    "drizzle-kit": "^0.31.8",
+    "drizzle-kit": "^0.31.9",
     "drizzle-orm": "^0.45.1",
     "formsnap": "^2.0.1",
     "mdsvex": "^0.12.6",
