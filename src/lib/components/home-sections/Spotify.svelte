@@ -16,6 +16,7 @@
     recentTracks: SpotifyTrack[] | null,
     topTracks: SpotifyTrack[] | null,
   } = $props();
+
 </script>
 
 <section class={className}>
@@ -40,9 +41,8 @@
     <SpotifyRecentTracks class="mt-10" recentTracks={recentTracks} />
     <SpotifyTopTracks class="mt-3" topTracks={topTracks} />
     {:else}
-    <div class="h-full w-full flex align-middle justify-center">
-      <h3 class="text-3xl">Unable to Load Data</h3>
+    <div class="flex flex-col justify-center font-oxanium h-[40vh]">
+      <p class="text-lg uppercase sm:text-xl font-bold text-center">Unable to Load Data :(</p>
     </div>
   {/if}
-
 </section>
