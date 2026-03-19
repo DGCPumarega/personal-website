@@ -14,5 +14,19 @@
   "preview_urls": true,
   "observability": {
     "enabled": true
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "D1_DATABASE",
+      "database_name": "personal-website-db",
+      "database_id": "f802d508-7d8e-4d7e-a9ef-9cac01c4698b",
+      "migrations_dir": "./drizzle",
+    },
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "KV_STORE",
+      "id": "aa9daa940b1345459c7026207e143fe1",
+    },
+  ],
 }
