@@ -64,7 +64,6 @@
   };
 
   const handleReload = () => {
-    console.log("triggered")
     invalidateAll();
   };
 </script>
