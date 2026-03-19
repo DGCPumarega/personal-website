@@ -19,7 +19,7 @@
         </a>
       </div>
       <p class="text-xs italic mt-2 text-blue-400">
-        SvelteKit, TypeScript, Drizzle ORM, Supabase, Tailwind CSS, shadcn-svelte, Netlify
+        SvelteKit, TypeScript, Tailwind CSS, shadcn-svelte, Drizzle ORM, Cloudflare
       </p>
     </li>
   </ul>
