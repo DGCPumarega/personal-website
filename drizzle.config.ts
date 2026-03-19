@@ -1,12 +1,20 @@
 import { defineConfig } from 'drizzle-kit';
 
-if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is not set');
+if(!process.env.CLOUDFLARE_ACCOUNT_ID) throw new Error("CLOUDFLARE_ACCOUNT_ID is not set");
+if(!process.env.CLOUDFLARE_DATABASE_ID) throw new Error("CLOUDFLARE_DATABASE_ID is not set");
+if(!process.env.CLOUDFLARE_D1_TOKEN) throw new Error("CLOUDFLARE_D1_TOKEN is not set");
 
 export default defineConfig({
 	schema: './src/lib/server/db/schema.ts',
-	dialect: 'postgresql',
-	dbCredentials: { url: process.env.DATABASE_URL },
+	dialect: 'sqlite',
 	verbose: true,
 	strict: true,
 	casing: 'snake_case',
+	driver: 'd1-http',
+	dbCredentials: {
+		accountId: process.env.CLOUDFLARE_ACCOUNT_ID!,
+		databaseId: process.env.CLOUDFLARE_DATABASE_ID!,
+		token: process.env.CLOUDFLARE_D1_TOKEN!,
+	},
+	out: "./drizzle",
 });
