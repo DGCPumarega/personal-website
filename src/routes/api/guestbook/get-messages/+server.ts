@@ -38,12 +38,12 @@ export const GET: RequestHandler = async ({ platform }) => {
     });
 
     message.replies.sort((first, second) =>
-      first.createdAt.getTime() - second.createdAt.getTime()
+      second.createdAt.getTime() - first.createdAt.getTime()
     );
   });
 
   guestbookMessages.sort((first, second) =>
-    first.createdAt.getTime() - second.createdAt.getTime()
+    second.createdAt.getTime() - first.createdAt.getTime()
   );
 
   return json({ messages: guestbookMessages }, { status: 200 });
