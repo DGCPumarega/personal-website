@@ -4,7 +4,7 @@ import { redirect } from "@sveltejs/kit";
 import { generateRandomString } from "$lib/utils";
 
 const CLIENT_ID = env.SPOTIFY_CLIENT_ID;
-const REDIRECT_URI = env.SPOTIFY_REDIRECT_URI_DEV;
+const REDIRECT_URI = env.SPOTIFY_REDIRECT_URI;
 
 export const load: PageServerLoad = () => {
   const scopes = "user-read-currently-playing user-read-recently-played user-top-read"
