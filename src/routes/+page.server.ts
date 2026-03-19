@@ -57,13 +57,6 @@ export const actions: Actions = {
       return fail(400, { messageForm });
     }
 
-    // let message: Omit<GuestbookMessage, "id" | "createdAt"> = {
-    //   username: messageForm.data.username,
-    //   content: messageForm.data.content,
-    //   website: (messageForm.data.website ? messageForm.data.website : null),
-    //   replies: [],
-    // };
-
     const response = await event.fetch("api/guestbook/post-message", {
       method: "POST",
       body: JSON.stringify({
@@ -85,12 +78,6 @@ export const actions: Actions = {
     if(!replyForm.valid) {
       return fail(400, { replyForm });
     }
-
-    // let reply: Omit<GuestbookReply, "id" | "createdAt"> = {
-    //   messageId: replyForm.data.messageId,
-    //   username: replyForm.data.username,
-    //   content: replyForm.data.content,
-    // };
 
     const response = await event.fetch("api/guestbook/post-reply", {
       method: "POST",
