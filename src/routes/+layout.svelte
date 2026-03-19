@@ -13,6 +13,11 @@
 
 	<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+	<title>DGCPumarega | Personal Website</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="DGCPumarega">
+	<meta name="description" content="Welcome to my personal website! This is where I share my stupid projects and other random sh*t">
 </svelte:head>
 
 <ThemeProvider>
@@ -78,5 +83,4 @@
 			opacity: 1;
 		}
 	}
-
 </style>
