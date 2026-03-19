@@ -6,7 +6,7 @@ import { base64encode } from "$lib/utils";
 
 const CLIENT_ID = env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = env.SPOTIFY_CLIENT_SECRET;
-const REDIRECT_URI = env.SPOTIFY_REDIRECT_URI_DEV;
+const REDIRECT_URI = env.SPOTIFY_REDIRECT_URI;
 
 export const load: PageServerLoad = async ({ url, platform }) => {
   const code = url.searchParams.get("code");
