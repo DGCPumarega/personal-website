@@ -1,9 +1,12 @@
-// See https://svelte.dev/docs/kit/types#app.d.ts
-// for information about these interfaces
+import { D1Database, IncomingRequestCfProperties } from "@cloudflare/workers-types";
+
 declare global {
 	namespace App {
 		interface Platform {
-			env: Env;
+			env: {
+				D1_DATABASE: D1Database, 
+				KV_STORE: KVNamespace,
+			};
 			ctx: ExecutionContext;
 			caches: CacheStorage;
 			cf?: IncomingRequestCfProperties
