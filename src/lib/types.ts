@@ -30,3 +30,11 @@ export type SpotifyTrack = {
   album: string;
   covers: string[];
 };
+
+export type SpotifyToken = {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  refresh_token: string;
+  scope: string;
+};
