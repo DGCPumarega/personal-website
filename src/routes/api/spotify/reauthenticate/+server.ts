@@ -1,5 +1,6 @@
 import type { RequestHandler } from "./$types";
 import type { SpotifyToken } from "$lib/types";
+import { json } from "@sveltejs/kit";
 import { env } from "$env/dynamic/private";
 import { base64encode } from "$lib/utils";
 
@@ -44,7 +45,7 @@ export const GET: RequestHandler = async ({ platform }) => {
     await platform.env.KV_STORE.put("spotify_access_token", token.access_token, { expirationTtl: token.expires_in });
     await platform.env.KV_STORE.put("spotify_refresh_token", token.refresh_token);
 
-    return new Response(null, { status: 201 });
+    return json({ accessToken: token.access_token }, { status: 201 });
   }
 
   return new Response(null, { status: 500 });

@@ -109,7 +109,8 @@ export const GET: RequestHandler = async ({ platform, fetch }) => {
     let response = await fetch("/api/spotify/reauthenticate");
     if(response.status >= 500) { return new Response(null, { status: 500 }); }
 
-    accessToken = await platform.env.KV_STORE.get("spotify_access_token");
+    let data: { accessToken: string } = await response.json();
+    accessToken = data.accessToken;
   }
 
   let nowPlaying = await getNowPlaying(accessToken!);
