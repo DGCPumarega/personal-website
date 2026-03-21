@@ -41,9 +41,7 @@ export const GET: RequestHandler = async ({ platform }) => {
 
   if(isToken(data)) {
     const token = data as SpotifyToken;
-
     await platform.env.KV_STORE.put("spotify_access_token", token.access_token, { expirationTtl: token.expires_in });
-    await platform.env.KV_STORE.put("spotify_refresh_token", token.refresh_token);
 
     return json({ accessToken: token.access_token }, { status: 201 });
   }
